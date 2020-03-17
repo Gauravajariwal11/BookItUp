@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="423dp"
+        android:layout_height="197dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/update_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/default_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:foreground="@drawable/round_profile_pic"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_person_black_24dp"/>
+            <TextView
+                android:id="@+id/fnameTV"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:hint="First name"/>
+            <TextView
+                android:id="@+id/lnameTV"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="2dp"
+                android:hint="Last name"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_email_white_24dp"/>
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:hint="@string/email"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_school_black_24dp"/>
+
+            <TextView
+                android:id="@+id/schoolTV"
+                android:layout_width="297dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="University"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_business_center_white_24dp"/>
+
+            <TextView
+                android:id="@+id/majorTV"
+                android:layout_width="297dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="Major"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_editProfile"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_style"
+        android:gravity="center_horizontal"
+        android:text="@string/action_edit_profile"
+        android:textColor="@color/colorWhite" />
+
+
+    <TextView
+        android:id="@+id/btn_changePassword"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/change_password"
+        android:gravity="center"
+        android:clickable="true"
+        android:textColor="@color/colorPrimary"/>
+</LinearLayout>

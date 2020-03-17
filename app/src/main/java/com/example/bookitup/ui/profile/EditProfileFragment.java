@@ -1,23 +1,22 @@
 package com.example.bookitup.ui.profile;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.ListFragment;
 
-import com.example.bookitup.ResetPasswordActivity;
 import com.example.bookitup.UserInformation;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -35,12 +34,12 @@ import com.squareup.picasso.Picasso;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class ProfileFragment extends Fragment {
-    private ProfileViewModel profileViewModel;
+public class EditProfileFragment extends Fragment {
     private ImageView profileIV;
-    private TextView fNameTV, lNameTV, emailTV, schoolTV, majorTV;
-    private Button editProfileBtn, forgotPasswordBtn;
-    private Context profileContext;
+    private EditText fNameET, lNameET, schoolET, majorET;
+    private Button saveBtn;
+    private TextView emailTV;
+    private ProgressBar progressBar;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -48,49 +47,35 @@ public class ProfileFragment extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseStorage mStorage;
-    private  StorageReference mReference;
+    private StorageReference mReference;
 
+    //vars
+    private UserInformation user;
+
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         profileIV = view.findViewById(R.id.update_imageView);
-        fNameTV = view.findViewById(R.id.fnameTV);
-        lNameTV = view.findViewById(R.id.lnameTV);
+        fNameET = view.findViewById(R.id.fnameTV);
+        lNameET = view.findViewById(R.id.lnameTV);
         emailTV = view.findViewById(R.id.textViewEmail);
-        schoolTV = view.findViewById(R.id.schoolTV);
-        majorTV = view.findViewById(R.id.majorTV);
-
-
-        profileContext = getContext();
+        schoolET = view.findViewById(R.id.uniTV);
+        majorET = view.findViewById(R.id.majorTV);
+        progressBar = view.findViewById(R.id.progressBar);
 
         setupFirebaseAuth();
 
 
-        Button editProfile = view.findViewById(R.id.btn_editProfile);
-        editProfile.setOnClickListener(new View.OnClickListener() {
+        saveBtn = view.findViewById(R.id.btnSave);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditProfileFragment editProfileFragment = new EditProfileFragment();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction()
-                        .replace(R.id.nav_host_fragment,editProfileFragment,editProfileFragment.getTag())
-                        .addToBackStack(null)
-                        .commit();
-//                transaction.replace(R.id.nav_profile,editProfileFragment);
+                saveProfileSetting();
             }
         });
-
-        TextView changePassword = view.findViewById(R.id.btn_changePassword);
-        changePassword.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getActivity(), ResetPasswordActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
-
+    return view;
     }
 
      /*
@@ -138,16 +123,13 @@ public class ProfileFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //retrieve user information from the database
-//                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
                 UserInformation userProfile = dataSnapshot.getValue(UserInformation.class);
                 FirebaseUser user = mAuth.getCurrentUser();
-                fNameTV.setText(userProfile.getfname());
-                lNameTV.setText(userProfile.getlname());
+                fNameET.setText(userProfile.getfname());
+                lNameET.setText(userProfile.getlname());
                 emailTV.setText(user.getEmail());
-                schoolTV.setText(userProfile.getSchool());
-                majorTV.setText(userProfile.getMajor());
+                schoolET.setText(userProfile.getSchool());
+                majorET.setText(userProfile.getMajor());
 
                 //retrieve images for the user in question
 
@@ -157,6 +139,74 @@ public class ProfileFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    private void saveProfileSetting(){
+        final String fname = fNameET.getText().toString().trim();
+        final String lname = lNameET.getText().toString().trim();
+        final String university = schoolET.getText().toString().trim();
+        final String major = majorET.getText().toString().trim();
+
+        myRef.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserInformation user = dataSnapshot.getValue(UserInformation.class);
+
+                //case 1: change first name
+                if(!user.getfname().equals(fname)){
+                    updateUserAccountSettings(fname,null,null,null);
+                }
+                if(!user.getlname().equals(lname)){
+                    updateUserAccountSettings(null,lname,null,null);
+                }
+                if(!user.getSchool().equals(university)){
+                    updateUserAccountSettings(null,null,university,null);
+                }
+                if(!user.getMajor().equals(major)){
+                    updateUserAccountSettings(null,null,null,major);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * Update 'user_account_settings' node for the current user
+     * @param fname
+     * @param lname
+     * @param school
+     * @param major
+     */
+    public void updateUserAccountSettings(String fname, String lname, String school, String major){
+        String userID = mAuth.getCurrentUser().getUid();
+        Log.d(TAG, "updateUserAccountSettings: updating user account settings.");
+        if(fname != null){
+            myRef.child("fname")
+                    .setValue(fname);
+        }
+
+
+        if(lname != null) {
+            myRef.child("lname")
+                    .setValue(lname);
+        }
+
+        if(school != null) {
+            myRef.child("uni")
+                    .setValue(school);
+        }
+
+        if(major != null) {
+            myRef.child("major")
+                    .setValue(major);
+        }
+        Toast.makeText(getContext(), "Successed.", Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.GONE);
     }
 
 }
