@@ -27,10 +27,10 @@
 
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.bookitup.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_books"
+        android:name="com.example.bookitup.ui.books.BooksFragment"
+        android:label="@string/menu_books"
+        tools:layout="@layout/fragment_books" />
 
     <fragment
         android:id="@+id/nav_slideshow"

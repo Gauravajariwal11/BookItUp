@@ -1,4 +1,4 @@
-package com.example.bookitup.ui.gallery;
+package com.example.bookitup.ui.books;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.bookitup.R;
 
-public class GalleryFragment extends Fragment {
+public class BooksFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private BooksViewModel booksViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        booksViewModel =
+                ViewModelProviders.of(this).get(BooksViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_books, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
+        booksViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
