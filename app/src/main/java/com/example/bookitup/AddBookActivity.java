@@ -101,7 +101,7 @@ public class AddBookActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 detail.setXauthor(Nbook.getText().toString().trim());
-                detail.setXisbn(Nisbn.getText().toString().trim());
+               // detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXdate(getDateTime().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));

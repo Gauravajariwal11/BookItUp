@@ -7,12 +7,15 @@ public class BookActivity
 {
 
     private String Xbook;
-    private String Xisbn;
+    private long Xisbn;
     private String Xdate;
     private String Xauthor;
     private float Xprice;
     private String Xcondition;
     private String Xdescription;
+    private  String Xedition;
+    private String image;
+
     public BookActivity() {
     }
 
@@ -24,13 +27,35 @@ public class BookActivity
         Xbook = xbook;
     }
 
-    public String getXisbn() {
+
+
+    public long getXisbn() {
+
         return Xisbn;
     }
 
-    public void setXisbn(String xisbn) {
+    public void setXisbn(long xisbn) {
         Xisbn = xisbn;
     }
+
+
+
+    public String getXedition() {
+
+        return Xedition;
+    }
+
+    public void setXedition(String xedition) {
+        Xedition = xedition;
+    }
+
+
+    public String getImage() {
+
+        return image;
+    }
+
+
 
     public String getXdate() {
         return Xdate;
