@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     private EditText mSearchField;
     private ImageButton mSearchBtn;
     private Spinner mSearchOptions;
+    private TextView mBookSelected;
 
     private RecyclerView mResultList;
 
@@ -46,14 +47,6 @@ public class HomeFragment extends Fragment {
 
     private Context homeContext;
 
-
-    //firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
-    private FirebaseStorage mStorage;
-    private StorageReference mReference;
 
     FirebaseRecyclerAdapter<BookActivity,BooksViewHolder> adapter;
 
@@ -92,9 +85,7 @@ public class HomeFragment extends Fragment {
 
         mResultList = view.findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
-
         mResultList.setLayoutManager(new LinearLayoutManager(homeContext));
-
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +98,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    //search for books
     private void firebaseBooksSearch(String searchText) {
 
         Toast.makeText(homeContext, "Started Search", Toast.LENGTH_LONG).show();
@@ -139,42 +131,6 @@ public class HomeFragment extends Fragment {
             };
 
             mResultList.setAdapter(adapter);
-
-
-    }
-    public static class BooksViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public BooksViewHolder(View itemView) {
-            super(itemView);
-
-            mView = itemView;
-
-        }
-
-        public void setDetails(Context ctx, String bookName, String authorName, String edition, String isbn, String coverImage){
-
-            TextView bookNameTV = (TextView) mView.findViewById(R.id.book_name_text);
-            TextView authorNameTV = (TextView) mView.findViewById(R.id.author_name);
-            TextView editionTV = (TextView) mView.findViewById(R.id.edition);
-            TextView isbnTV = (TextView) mView.findViewById(R.id.isbn);
-            ImageView coverIM = (ImageView) mView.findViewById(R.id.cover_image);
-
-
-            bookNameTV.setText(bookName);
-            authorNameTV.setText(authorName);
-            editionTV.setText(edition +" edition");
-            isbnTV.setText(isbn);
-
-            Glide.with(ctx).load(coverImage).error(R.drawable.ic_nocover).into(coverIM);
-
-
-        }
-
-
-
-
     }
 
 }
