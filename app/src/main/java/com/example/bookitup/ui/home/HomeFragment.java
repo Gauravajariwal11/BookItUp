@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +38,13 @@ public class HomeFragment extends Fragment {
 
     private EditText mSearchField;
     private ImageButton mSearchBtn;
+    private Spinner mSearchOptions;
 
     private RecyclerView mResultList;
 
     private DatabaseReference mUserDatabase;
 
     private Context homeContext;
-    private Activity activity;
 
 
     //firebase
@@ -54,20 +57,42 @@ public class HomeFragment extends Fragment {
 
     FirebaseRecyclerAdapter<BookActivity,BooksViewHolder> adapter;
 
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        homeContext = getContext();
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Booklist");
 
 
         mSearchField = view.findViewById(R.id.search_field);
-        mSearchBtn =  view.findViewById(R.id.search_btn);
+        mSearchBtn = view.findViewById(R.id.search_btn);
+
+        //drop down menu
+        mSearchOptions = view.findViewById(R.id.search_options);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(homeContext,
+                R.array.search_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSearchOptions.setAdapter(adapter);
+        mSearchOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String option = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), option, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         mResultList = view.findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
-        homeContext = getContext();
+
         mResultList.setLayoutManager(new LinearLayoutManager(homeContext));
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,29 +111,35 @@ public class HomeFragment extends Fragment {
 
         Toast.makeText(homeContext, "Started Search", Toast.LENGTH_LONG).show();
 
-        Query firebaseSearchQuery = mUserDatabase.orderByChild("xbook").startAt(searchText.toUpperCase()).endAt(searchText.toLowerCase() + "\uf8ff");
+        Query firebaseSearchQuery = mUserDatabase.orderByChild("xbook")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff");
 
-        adapter = new FirebaseRecyclerAdapter<BookActivity, BooksViewHolder>(
 
-                BookActivity.class,
-                R.layout.list_view,
-                BooksViewHolder.class,
-                firebaseSearchQuery
 
-        ) {
-            @Override
-            protected void populateViewHolder(BooksViewHolder viewHolder, BookActivity model, int position) {
 
-                viewHolder.setDetails(homeContext,
-                        model.getXbook(),
-                        model.getXauthor(),
-                        model.getXedition(),
-                        model.getXisbn(),
-                        model.getXcondition());
-            }
-        };
+            adapter = new FirebaseRecyclerAdapter<BookActivity, BooksViewHolder>(
 
-        mResultList.setAdapter(adapter);
+                    BookActivity.class,
+                    R.layout.list_view,
+                    BooksViewHolder.class,
+                    firebaseSearchQuery
+
+            ) {
+                @Override
+                protected void populateViewHolder(BooksViewHolder viewHolder, BookActivity model, int position) {
+
+                    viewHolder.setDetails(homeContext,
+                            model.getXbook(),
+                            model.getXauthor(),
+                            model.getedition(),
+                            model.getXisbn(),
+                            model.getImage());
+                }
+            };
+
+            mResultList.setAdapter(adapter);
+
 
     }
     public static class BooksViewHolder extends RecyclerView.ViewHolder {
@@ -122,7 +153,7 @@ public class HomeFragment extends Fragment {
 
         }
 
-        public void setDetails(Context ctx, String bookName, String authorName, String edition, long isbn, String coverImage){
+        public void setDetails(Context ctx, String bookName, String authorName, String edition, String isbn, String coverImage){
 
             TextView bookNameTV = (TextView) mView.findViewById(R.id.book_name_text);
             TextView authorNameTV = (TextView) mView.findViewById(R.id.author_name);
@@ -133,10 +164,10 @@ public class HomeFragment extends Fragment {
 
             bookNameTV.setText(bookName);
             authorNameTV.setText(authorName);
-            editionTV.setText(edition);
-            isbnTV.setText(String.valueOf(isbn));
+            editionTV.setText(edition +" edition");
+            isbnTV.setText(isbn);
 
-            Glide.with(ctx).load(coverImage).into(coverIM);
+            Glide.with(ctx).load(coverImage).error(R.drawable.ic_nocover).into(coverIM);
 
 
         }

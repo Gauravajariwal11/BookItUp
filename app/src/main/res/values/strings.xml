@@ -28,4 +28,11 @@
     <string name="university">University</string>
     <string name="major">Major</string>
     <string name="email">Email</string>
+    <string name="by"> <i>by</i></string>
+
+    <string-array name="search_options">
+        <item>Book</item>
+        <item>Author</item>
+        <item>ISBN</item>
+    </string-array>
 </resources>

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/cover_image"
@@ -37,7 +38,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginRight="30dp"
         android:layout_toEndOf="@+id/cover_image"
-        android:text= "by author"
+        android:text= "@string/by"
         android:textColor="#999999"
         android:textSize="14sp" />
 
