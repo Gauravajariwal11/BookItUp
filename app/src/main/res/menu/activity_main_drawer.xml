@@ -10,11 +10,11 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_person_black_24dp"
+            android:icon="@drawable/ic_menu_profile"
             android:title="@string/menu_profile"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_books"
+            android:icon="@drawable/ic_menu_books"
             android:title="@string/menu_books" />
         <item
             android:id="@+id/nav_slideshow"
