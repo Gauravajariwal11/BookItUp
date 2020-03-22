@@ -31,12 +31,11 @@ public class BooksViewHolder extends RecyclerView.ViewHolder {
 
 
         bookNameTV.setText(bookName);
-        authorNameTV.setText(authorName);
+        authorNameTV.setText("by: " + authorName);
         editionTV.setText(edition + " edition");
-        isbnTV.setText(isbn);
+        isbnTV.setText("ISBN: " + isbn);
 
         Glide.with(ctx).load(coverImage).error(R.drawable.ic_nocover).into(coverIM);
-
 
     }
 }

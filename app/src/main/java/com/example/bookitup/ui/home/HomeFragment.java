@@ -47,6 +47,9 @@ public class HomeFragment extends Fragment {
 
     private Context homeContext;
 
+    private String option;
+
+
 
     FirebaseRecyclerAdapter<BookActivity,BooksViewHolder> adapter;
 
@@ -72,7 +75,7 @@ public class HomeFragment extends Fragment {
         mSearchOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String option = parent.getItemAtPosition(position).toString();
+                option = parent.getItemAtPosition(position).toString();
                 Toast.makeText(parent.getContext(), option, Toast.LENGTH_SHORT).show();
             }
 
@@ -83,27 +86,42 @@ public class HomeFragment extends Fragment {
         });
 
 
+
+
+
         mResultList = view.findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(homeContext));
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String searchOption = "";
+                switch (option){
+                    case "Book":
+                        searchOption = "xbook";
+                        break;
+                    case "Author":
+                        searchOption = "xauthor";
+                        break;
+                    case "ISBN":
+                        searchOption = "xisbn";
+                        break;
+                }
 
                 String searchText = mSearchField.getText().toString();
 
-                firebaseBooksSearch(searchText);
+                firebaseBooksSearch(searchText, searchOption);
             }
         });
         return view;
     }
 
     //search for books
-    private void firebaseBooksSearch(String searchText) {
+    private void firebaseBooksSearch(String searchText, String searchOption) {
 
         Toast.makeText(homeContext, "Started Search", Toast.LENGTH_LONG).show();
 
-        Query firebaseSearchQuery = mUserDatabase.orderByChild("xbook")
+        Query firebaseSearchQuery = mUserDatabase.orderByChild(searchOption)
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff");
 
