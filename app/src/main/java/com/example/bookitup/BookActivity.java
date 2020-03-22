@@ -7,7 +7,7 @@ public class BookActivity
 {
 
     private String Xbook;
-    private String Xisbn;
+    private String isbn;
     private String Xdate;
     private String Xauthor;
     private float Xprice;
@@ -29,13 +29,13 @@ public class BookActivity
 
 
 
-    public String getXisbn() {
+    public String getIsbn() {
 
-        return Xisbn;
+        return isbn;
     }
 
-    public void setXisbn(String xisbn) {
-        Xisbn = xisbn;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
 

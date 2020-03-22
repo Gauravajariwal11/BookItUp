@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment {
     private EditText mSearchField;
     private ImageButton mSearchBtn;
     private Spinner mSearchOptions;
-    private TextView mBookSelected;
 
     private RecyclerView mResultList;
 
@@ -76,7 +75,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 option = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), option, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -105,7 +103,7 @@ public class HomeFragment extends Fragment {
                         searchOption = "xauthor";
                         break;
                     case "ISBN":
-                        searchOption = "xisbn";
+                        searchOption = "isbn";
                         break;
                 }
 
@@ -144,7 +142,7 @@ public class HomeFragment extends Fragment {
                             model.getXbook(),
                             model.getXauthor(),
                             model.getedition(),
-                            model.getXisbn(),
+                            model.getIsbn(),
                             model.getImage());
                 }
             };
