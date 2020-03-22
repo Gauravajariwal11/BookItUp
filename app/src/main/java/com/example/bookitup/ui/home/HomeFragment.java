@@ -92,6 +92,7 @@ public class HomeFragment extends Fragment {
         mResultList = view.findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(homeContext));
+
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
