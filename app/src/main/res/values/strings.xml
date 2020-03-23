@@ -12,7 +12,7 @@
     <string name="action_edit_profile">Edit Profile</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_books">My Books</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
@@ -28,4 +28,11 @@
     <string name="university">University</string>
     <string name="major">Major</string>
     <string name="email">Email</string>
+    <string name="by"> <i>by</i></string>
+
+    <string-array name="search_options">
+        <item>Book</item>
+        <item>Author</item>
+        <item>ISBN</item>
+    </string-array>
 </resources>

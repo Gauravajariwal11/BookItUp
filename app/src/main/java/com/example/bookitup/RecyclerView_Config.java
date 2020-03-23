@@ -28,11 +28,11 @@ public class RecyclerView_Config {
 
         private String key;
         public BookItemView(ViewGroup parent){
-            super(LayoutInflater.from(mContext).inflate(R.layout.book_list_item,parent,false));
-            mTitle = (TextView) itemView.findViewById(R.id.title_txtView);
-            mAuthor = (TextView) itemView.findViewById(R.id.author_txtView);
-            mCategory = (TextView) itemView.findViewById(R.id.category_txtView);
-            mISBN = (TextView) itemView.findViewById(R.id.isbn_txtView);
+            super(LayoutInflater.from(mContext).inflate(R.layout.list_view,parent,false));
+            mTitle = (TextView) itemView.findViewById(R.id.book_name_text);
+            mAuthor = (TextView) itemView.findViewById(R.id.author_name);
+            mCategory = (TextView) itemView.findViewById(R.id.edition);
+            mISBN = (TextView) itemView.findViewById(R.id.isbn);
 
         }
         public void bind(BookActivity book, String key){

@@ -1,0 +1,21 @@
+[INFO] output of locale.getdefaultlocale(): ('en_US', 'UTF-8')
+[INFO] encoding we chose in the end: UTF-8
+[INFO] Running command /usr/local/Cellar/infer/0.17.0/lib/infer/infer/bin/../lib/python/infer.py -j 12 --project-root /Users/annguyen/BookItUp/app --out /Users/annguyen/BookItUp/app/infer-out -- ./gradlew build
+[INFO] Path to infer script /usr/local/Cellar/infer/0.17.0/lib/infer/infer/bin/../lib/python/infer.py (/usr/local/Cellar/infer/0.17.0/lib/infer/infer/lib/python/infer.py)
+[INFO] Platform: Darwin-19.3.0-x86_64-i386-64bit
+[INFO] PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+[INFO] SHELL=/bin/zsh
+[INFO] PWD=/Users/annguyen/BookItUp/app
+[INFO] Running with:
+calling ./gradlew --version failed
+Traceback (most recent call last):
+  File "/usr/local/Cellar/infer/0.17.0/lib/infer/infer/lib/python/inferlib/capture/util.py", line 53, in run_cmd_ignore_fail
+    return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 216, in check_output
+    process = Popen(stdout=PIPE, *popenargs, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 394, in __init__
+    errread, errwrite)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1047, in _execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory
+

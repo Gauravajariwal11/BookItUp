@@ -69,7 +69,6 @@ public class AddBookActivity extends AppCompatActivity {
         initializeUI();
         Nbook = findViewById(R.id.bookname);
         Nisbn=findViewById(R.id.isbn);
-        Ndate=findViewById(R.id.date);
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
         Ncondition=findViewById(R.id.condition);
