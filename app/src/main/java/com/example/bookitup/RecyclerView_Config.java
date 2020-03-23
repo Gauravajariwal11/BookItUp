@@ -16,7 +16,7 @@ public class RecyclerView_Config {
     public void setConfig(RecyclerView recyclerView, Context context, List<BookActivity> books, List<String> keys){
         mContext = context;
         mBooksAdapter = new BooksAdapter(books,keys);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));/*here!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mBooksAdapter);
     }
 

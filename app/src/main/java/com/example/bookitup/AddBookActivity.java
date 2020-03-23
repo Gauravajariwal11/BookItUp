@@ -54,7 +54,8 @@ public class AddBookActivity extends AppCompatActivity {
     DatabaseReference newrecord;
     FirebaseDatabase database;
     int maxid=0;
-    BookActivity detail;
+    BookActivity detail = new BookActivity();
+    private FirebaseAuth firebaseAuth;
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -74,8 +75,8 @@ public class AddBookActivity extends AppCompatActivity {
         Ncondition=findViewById(R.id.condition);
         Ndescription=findViewById(R.id.description);
         Nsave=findViewById(R.id.save);
-        detail=new BookActivity();
-        newrecord= database.getInstance().getReference().child("BookList");
+        //FirebaseUser currentuser = firebaseAuth.getCurrentUser();
+        newrecord= database.getInstance().getReference().child("Booklist");
 
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
@@ -99,18 +100,20 @@ public class AddBookActivity extends AppCompatActivity {
 
             public void onClick(View view)
             {
-                detail.setXauthor(Nbook.getText().toString().trim());
+                detail.setXbook(Nbook.getText().toString().trim());
                 detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXdate(getDateTime().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
                 detail.setXdescription(Ndescription.getText().toString().trim());
+                detail.setXcondition(Ncondition.getText().toString().trim());
+                detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
             }
 
         });
-                detail.setXauthor(Ncondition.getText().toString().trim());
+
     }
     private void initializeUI() {
         entry_name = findViewById(R.id.bookname);

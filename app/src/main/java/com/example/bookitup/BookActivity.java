@@ -13,7 +13,17 @@ public class BookActivity
     private float Xprice;
     private String Xcondition;
     private String Xdescription;
+    private String Xuid;
     public BookActivity() {
+    }
+
+    public BookActivity(String xbook, String xisbn, String xauthor, float xprice, String xcondition, String xdescription) {
+        Xbook = xbook;
+        Xisbn = xisbn;
+        Xauthor = xauthor;
+        Xprice = xprice;
+        Xcondition = xcondition;
+        Xdescription = xdescription;
     }
 
     public String getXbook() {
@@ -70,5 +80,13 @@ public class BookActivity
 
     public void setXdescription(String xdescription) {
         Xdescription = xdescription;
+    }
+
+    public String getXuid() {
+        return Xuid;
+    }
+
+    public void setXuid(String xuid) {
+        Xuid = xuid;
     }
 }

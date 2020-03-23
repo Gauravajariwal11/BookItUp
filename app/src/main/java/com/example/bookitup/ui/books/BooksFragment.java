@@ -11,12 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookitup.BookActivity;
+import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
+import com.example.bookitup.RecyclerView_Config;
+
+import java.util.List;
 
 public class BooksFragment extends Fragment {
 
     private BooksViewModel booksViewModel;
+    private RecyclerView mRecyclerView;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +36,30 @@ public class BooksFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+            }
+        });
+
+        mRecyclerView = root.findViewById(R.id.recyclerview_mybooks);
+        new BookDatabaseEdit().readBooks(new BookDatabaseEdit.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
+                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys);
+                System.out.println(mRecyclerView+"\n"+getContext()+"\n"+books+"\n"+keys+"\n");
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
             }
         });
         return root;
