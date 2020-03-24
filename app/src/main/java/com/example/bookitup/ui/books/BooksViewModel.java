@@ -10,7 +10,7 @@ public class BooksViewModel extends ViewModel {
 
     public BooksViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is where user track their books and order history");
+        mText.setValue("");
     }
 
     public LiveData<String> getText() {

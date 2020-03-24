@@ -83,6 +83,10 @@ public class BookActivity
     }
 
     public String getXuid() {
+        if(Xuid==null)
+        {
+            return " ";
+        }
         return Xuid;
     }
 

@@ -1,5 +1,6 @@
 package com.example.bookitup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +14,7 @@ public class BookDatabaseEdit {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReferenceBooks;
     private List<BookActivity> books = new ArrayList<>();
+    private FirebaseAuth firebaseAuth;
 
     public interface DataStatus{
         void DataIsLoaded(List<BookActivity> books, List<String> keys);
@@ -34,6 +36,36 @@ public class BookDatabaseEdit {
                     keys.add(keyNode.getKey());
                     BookActivity book = keyNode.getValue(BookActivity.class);
                     books.add(book);
+                }
+                dataStatus.DataIsLoaded(books,keys);
+                System.out.println(keys);
+                System.out.println(books);
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void readMyBooks(final DataStatus dataStatus){
+        mReferenceBooks.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot dataSnapshot) {
+                books.clear();
+                List<String> keys = new ArrayList<>();
+                for(DataSnapshot keyNode : dataSnapshot.getChildren()){
+                    BookActivity book = keyNode.getValue(BookActivity.class);
+                    System.out.println(book);
+                    System.out.println(keyNode.getKey());
+                    if(book.getXuid().equals(firebaseAuth.getInstance().getCurrentUser().getUid()))
+                    {
+                        keys.add(keyNode.getKey());
+
+                        books.add(book);
+                    }
+
                 }
                 dataStatus.DataIsLoaded(books,keys);
                 System.out.println(keys);

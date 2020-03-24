@@ -40,7 +40,7 @@ public class BooksFragment extends Fragment {
         });
 
         mRecyclerView = root.findViewById(R.id.recyclerview_mybooks);
-        new BookDatabaseEdit().readBooks(new BookDatabaseEdit.DataStatus() {
+        new BookDatabaseEdit().readMyBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
                 new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys);
