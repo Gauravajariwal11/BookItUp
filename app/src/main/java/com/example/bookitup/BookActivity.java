@@ -7,12 +7,16 @@ public class BookActivity
 {
 
     private String Xbook;
-    private String Xisbn;
+    private String isbn;
     private String Xdate;
     private String Xauthor;
     private float Xprice;
     private String Xcondition;
     private String Xdescription;
+    private  String edition;
+    private String image;
+    private String uid;
+
     public BookActivity() {
     }
 
@@ -24,13 +28,38 @@ public class BookActivity
         Xbook = xbook;
     }
 
-    public String getXisbn() {
-        return Xisbn;
+
+
+    public String getIsbn() {
+
+        return isbn;
     }
 
-    public void setXisbn(String xisbn) {
-        Xisbn = xisbn;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
+
+
+
+    public String getedition() {
+
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+
+    public String getImage() {
+
+        return image;
+    }
+    public void setImage(String image){
+        this.image = image;
+    }
+
+
 
     public String getXdate() {
         return Xdate;
@@ -70,5 +99,12 @@ public class BookActivity
 
     public void setXdescription(String xdescription) {
         Xdescription = xdescription;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
