@@ -15,6 +15,7 @@ public class BookActivity
     private String Xdescription;
     private  String edition;
     private String image;
+    private String uid;
 
     public BookActivity() {
     }
@@ -98,5 +99,12 @@ public class BookActivity
 
     public void setXdescription(String xdescription) {
         Xdescription = xdescription;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
