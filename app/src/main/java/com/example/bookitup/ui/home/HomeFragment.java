@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         new BookDatabaseEdit().readBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys);
+                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys,false);
             }
 
             @Override

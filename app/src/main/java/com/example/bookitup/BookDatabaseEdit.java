@@ -1,5 +1,6 @@
 package com.example.bookitup;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -78,5 +79,24 @@ public class BookDatabaseEdit {
 
             }
         });
+    }
+    public void updateBook(String key, BookActivity book, final DataStatus dataStatus)
+    {
+        mReferenceBooks.child(key).setValue(book).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsUpdated();
+            }
+        });
+    }
+    public  void deleteBook(String key, final DataStatus dataStatus)
+    {
+        mReferenceBooks.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsDeleted();
+            }
+        });
+
     }
 }

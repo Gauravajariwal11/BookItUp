@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -43,12 +44,13 @@ public class BooksFragment extends Fragment {
         new BookDatabaseEdit().readMyBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys);
+                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys,true);
                 System.out.println(mRecyclerView+"\n"+getContext()+"\n"+books+"\n"+keys+"\n");
             }
 
             @Override
             public void DataIsInserted() {
+                Toast.makeText(getContext(),"Book has been inserted",Toast.LENGTH_LONG).show();
 
             }
 

@@ -7,17 +7,22 @@ public class BookActivity
 {
 
     private String Xbook;
+    private String Xauthor;
+
+
+
+    private String Xedition;
     private String Xisbn;
     private String Xdate;
-    private String Xauthor;
-    private float Xprice;
+
+    private Float Xprice;
     private String Xcondition;
     private String Xdescription;
     private String Xuid;
     public BookActivity() {
     }
 
-    public BookActivity(String xbook, String xisbn, String xauthor, float xprice, String xcondition, String xdescription) {
+    public BookActivity(String xbook, String xisbn, String xauthor, Float xprice, String xcondition, String xdescription) {
         Xbook = xbook;
         Xisbn = xisbn;
         Xauthor = xauthor;
@@ -25,7 +30,13 @@ public class BookActivity
         Xcondition = xcondition;
         Xdescription = xdescription;
     }
+    public String getXedition() {
+        return Xedition;
+    }
 
+    public void setXedition(String xedition) {
+        Xedition = xedition;
+    }
     public String getXbook() {
         return Xbook;
     }
@@ -58,11 +69,11 @@ public class BookActivity
         Xauthor = xauthor;
     }
 
-    public float getXprice() {
+    public Float getXprice() {
         return Xprice;
     }
 
-    public void setXprice(float xprice) {
+    public void setXprice(Float xprice) {
         Xprice = xprice;
     }
 
