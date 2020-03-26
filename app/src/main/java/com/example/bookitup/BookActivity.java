@@ -7,19 +7,40 @@ public class BookActivity
 {
 
     private String Xbook;
-    private String isbn;
-    private String Xdate;
     private String Xauthor;
-    private float Xprice;
+
+
+
+    private String Xedition;
+    private String Xisbn;
+    private String Xdate;
+
+    private Float Xprice;
     private String Xcondition;
     private String Xdescription;
-    private  String edition;
-    private String image;
-    private String uid;
 
+
+
+    private String Ximage;
+    private String Xuid;
     public BookActivity() {
     }
 
+    public BookActivity(String xbook, String xisbn, String xauthor, Float xprice, String xcondition, String xdescription) {
+        Xbook = xbook;
+        Xisbn = xisbn;
+        Xauthor = xauthor;
+        Xprice = xprice;
+        Xcondition = xcondition;
+        Xdescription = xdescription;
+    }
+    public String getXedition() {
+        return Xedition;
+    }
+
+    public void setXedition(String xedition) {
+        Xedition = xedition;
+    }
     public String getXbook() {
         return Xbook;
     }
@@ -28,38 +49,13 @@ public class BookActivity
         Xbook = xbook;
     }
 
-
-
-    public String getIsbn() {
-
-        return isbn;
+    public String getXisbn() {
+        return Xisbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setXisbn(String xisbn) {
+        Xisbn = xisbn;
     }
-
-
-
-    public String getedition() {
-
-        return edition;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
-    }
-
-
-    public String getImage() {
-
-        return image;
-    }
-    public void setImage(String image){
-        this.image = image;
-    }
-
-
 
     public String getXdate() {
         return Xdate;
@@ -77,11 +73,11 @@ public class BookActivity
         Xauthor = xauthor;
     }
 
-    public float getXprice() {
+    public Float getXprice() {
         return Xprice;
     }
 
-    public void setXprice(float xprice) {
+    public void setXprice(Float xprice) {
         Xprice = xprice;
     }
 
@@ -100,11 +96,23 @@ public class BookActivity
     public void setXdescription(String xdescription) {
         Xdescription = xdescription;
     }
-    public String getUid() {
-        return uid;
+
+    public String getXuid() {
+        if(Xuid==null)
+        {
+            return " ";
+        }
+        return Xuid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setXuid(String xuid) {
+        Xuid = xuid;
+    }
+    public String getXimage() {
+        return Ximage;
+    }
+
+    public void setXimage(String ximage) {
+        Ximage = ximage;
     }
 }

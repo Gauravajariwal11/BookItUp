@@ -49,12 +49,13 @@ import java.util.TimeZone;
 
 public class AddBookActivity extends AppCompatActivity {
     private EditText entry_name;
-    EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Ncondition,Ndescription,Nedition,Nimage;
+    EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Ncondition,Ndescription;
     Button Nsave;
     DatabaseReference newrecord;
     FirebaseDatabase database;
     int maxid=0;
-    BookActivity detail;
+    BookActivity detail = new BookActivity();
+    private FirebaseAuth firebaseAuth;
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -68,16 +69,13 @@ public class AddBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_book);
         initializeUI();
         Nbook = findViewById(R.id.bookname);
-        Nedition = findViewById(R.id.edition);
         Nisbn=findViewById(R.id.isbn);
-        Ndate=findViewById(R.id.date);
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
         Ncondition=findViewById(R.id.condition);
         Ndescription=findViewById(R.id.description);
-        Nimage=findViewById(R.id.image);
         Nsave=findViewById(R.id.save);
-        detail=new BookActivity();
+        //FirebaseUser currentuser = firebaseAuth.getCurrentUser();
         newrecord= database.getInstance().getReference().child("Booklist");
 
         newrecord.addValueEventListener(new ValueEventListener() {
@@ -89,7 +87,6 @@ public class AddBookActivity extends AppCompatActivity {
                 }
                 else {}
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -103,21 +100,20 @@ public class AddBookActivity extends AppCompatActivity {
 
             public void onClick(View view)
             {
-                detail.setXauthor(Nbook.getText().toString().trim());
-                detail.setImage(Nbook.getText().toString().trim());
-                detail.setIsbn(Nisbn.getText().toString().trim());
-                detail.setEdition(Nedition.getText().toString().trim());
+                detail.setXbook(Nbook.getText().toString().trim());
+                detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXdate(getDateTime().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
                 detail.setXdescription(Ndescription.getText().toString().trim());
+                detail.setXcondition(Ncondition.getText().toString().trim());
+                detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
-                Toast.makeText(AddBookActivity.this,"Book added successfully",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AddBookActivity.this, MainActivity.class);
-                startActivity(intent);
+                Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
             }
 
         });
+
     }
     private void initializeUI() {
         entry_name = findViewById(R.id.bookname);
