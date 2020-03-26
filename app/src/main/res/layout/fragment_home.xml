@@ -1,111 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.bookitup.MainActivity">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/search_edit_text"
-        android:layout_width="0dp"
+        android:id="@+id/search_field"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="2dp"
-        android:hint="Enter book name or ISBN"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview_books"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/search_layout"
+        android:ems="10"
+        android:hint="Enter keywords"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="#999999"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_alignBottom="@+id/search_field"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/background_light"
+        app:srcCompat="@drawable/ic_search_black_24dp" />
+
+    <Spinner
+        android:id="@+id/search_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_alignBottom="@+id/search_field"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="110dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_books"
+        android:id="@+id/result_list"
         android:layout_width="match_parent"
-        android:layout_height="674dp"
-        android:layout_marginTop="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_field"
+        android:layout_marginTop="50dp"></androidx.recyclerview.widget.RecyclerView>
 
-
-    <!--   <LinearLayout
-           android:id="@+id/linearLayout"
-           android:layout_width="0dp"
-           android:layout_height="0dp"
-           android:layout_marginStart="1dp"
-           android:layout_marginLeft="1dp"
-           android:layout_marginEnd="1dp"
-           android:layout_marginRight="1dp"
-           android:orientation="vertical"
-           android:visibility="visible"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/search_edit_text"
-           tools:visibility="visible">
-
-           <ImageView
-               android:id="@+id/imageView2"
-               android:layout_width="149dp"
-               android:layout_height="115dp"
-               tools:srcCompat="@tools:sample/backgrounds/scenic[3]" />
-
-           <TextView
-               android:id="@+id/textView3"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Software Project Management"
-               android:src="@drawable/ic_library_books_black_24dp" />
-
-
-           <ImageView
-               android:id="@+id/imageView3"
-               android:layout_width="154dp"
-               android:layout_height="119dp"
-               android:src="@drawable/ic_library_books_black_24dp" />
-
-           <TextView
-               android:id="@+id/textView4"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Introduction to Software Engineering" />
-
-           <ImageView
-               android:id="@+id/imageView4"
-               android:layout_width="157dp"
-               android:layout_height="114dp"
-               android:src="@drawable/ic_library_books_black_24dp" />
-               tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-           <TextView
-               android:id="@+id/textView5"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Operating System" />
-
-           <ImageView
-               android:id="@+id/imageView5"
-               android:layout_width="157dp"
-               android:layout_height="114dp"
-               android:src="@drawable/ic_library_books_black_24dp" />
-               tools:srcCompat="@tools:sample/backgrounds/scenic" />
-       </LinearLayout>
-   -->
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
