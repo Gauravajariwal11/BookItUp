@@ -20,6 +20,9 @@ public class BookActivity
     private String Xdescription;
 
 
+    private String uid;
+
+
 
     private String Ximage;
     private String Xuid;
@@ -52,10 +55,14 @@ public class BookActivity
     public String getXisbn() {
         return Xisbn;
     }
-
     public void setXisbn(String xisbn) {
         Xisbn = xisbn;
     }
+
+
+
+
+
 
     public String getXdate() {
         return Xdate;
@@ -114,5 +121,12 @@ public class BookActivity
 
     public void setXimage(String ximage) {
         Ximage = ximage;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
