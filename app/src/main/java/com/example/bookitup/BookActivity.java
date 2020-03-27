@@ -7,15 +7,43 @@ public class BookActivity
 {
 
     private String Xbook;
+    private String Xauthor;
+
+
+
+    private String Xedition;
     private String Xisbn;
     private String Xdate;
-    private String Xauthor;
-    private float Xprice;
+
+    private Float Xprice;
     private String Xcondition;
     private String Xdescription;
+
+
+    private String uid;
+
+
+
+    private String Ximage;
+    private String Xuid;
     public BookActivity() {
     }
 
+    public BookActivity(String xbook, String xisbn, String xauthor, Float xprice, String xcondition, String xdescription) {
+        Xbook = xbook;
+        Xisbn = xisbn;
+        Xauthor = xauthor;
+        Xprice = xprice;
+        Xcondition = xcondition;
+        Xdescription = xdescription;
+    }
+    public String getXedition() {
+        return Xedition;
+    }
+
+    public void setXedition(String xedition) {
+        Xedition = xedition;
+    }
     public String getXbook() {
         return Xbook;
     }
@@ -27,10 +55,14 @@ public class BookActivity
     public String getXisbn() {
         return Xisbn;
     }
-
     public void setXisbn(String xisbn) {
         Xisbn = xisbn;
     }
+
+
+
+
+
 
     public String getXdate() {
         return Xdate;
@@ -48,11 +80,11 @@ public class BookActivity
         Xauthor = xauthor;
     }
 
-    public float getXprice() {
+    public Float getXprice() {
         return Xprice;
     }
 
-    public void setXprice(float xprice) {
+    public void setXprice(Float xprice) {
         Xprice = xprice;
     }
 
@@ -70,5 +102,31 @@ public class BookActivity
 
     public void setXdescription(String xdescription) {
         Xdescription = xdescription;
+    }
+
+    public String getXuid() {
+        if(Xuid==null)
+        {
+            return " ";
+        }
+        return Xuid;
+    }
+
+    public void setXuid(String xuid) {
+        Xuid = xuid;
+    }
+    public String getXimage() {
+        return Ximage;
+    }
+
+    public void setXimage(String ximage) {
+        Ximage = ximage;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

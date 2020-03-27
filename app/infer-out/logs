@@ -1,0 +1,22 @@
+[11008][environment] CWD = /Users/annguyen/BookItUp/app
+[11008][environment] No .inferconfig file found
+[11008][environment] Project root = /Users/annguyen/BookItUp/app
+[11008][environment] INFER_ARGS =   @/var/folders/_1/v4_sdl5d25bfqz5wnmv4frbc0000gn/T/args.tmp.63a890
+[11008][environment]   ++Contents of '/var/folders/_1/v4_sdl5d25bfqz5wnmv4frbc0000gn/T/args.tmp.63a890':
+[11008][environment]     run
+[11008][environment]   
+[11008][environment] command line arguments:   infer run -- ./gradlew buildActive checkers: biabduction (C/C++/ObjC, Java), fragment retains view (Java), inefficient keyset iterator (Java), liveness (C/C++/ObjC), RacerD (C/C++/ObjC, Java), SIOF (C/C++/ObjC), uninitialized variables (C/C++/ObjC), Starvation analysis (C/C++/ObjC, Java)
+[11008][environment] Infer log identifier is 
+Infer version v0.17.0
+[11008][environment] Copyright 2009 - present Facebook. All Rights Reserved.
+[11008][environment] 
+[11008][   progress] Capturing in gradle mode...
+[11008][ intern err]   /usr/local/Cellar/infer/0.17.0/lib/infer/infer/bin/../lib/python/infer.py
+  -j 12 --project-root /Users/annguyen/BookItUp/app --out
+  /Users/annguyen/BookItUp/app/infer-out -- ./gradlew build:
+  exited with code 1
+[11008][ intern err] Raised at file "string.ml", line 145, characters 16-31
+Called from file "string.ml" (inlined), line 149, characters 17-46
+Called from file "src/string.ml", line 407, characters 12-33
+Called from file "src/string.ml", line 416, characters 11-33
+

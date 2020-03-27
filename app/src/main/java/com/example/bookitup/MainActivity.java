@@ -49,13 +49,9 @@ public class MainActivity extends AppCompatActivity {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             FloatingActionButton fab = findViewById(R.id.fab);
-            Toast.makeText(getApplicationContext(), "on the main page", Toast.LENGTH_LONG).show();
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   //Snackbar.make(view, "Adding new book, please wait!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    Toast.makeText(getApplicationContext(), "Adding new book, please wait ", Toast.LENGTH_LONG).show();
-                    //progressBar.setVisibility(View.GONE);
                     Intent intent = new Intent(MainActivity.this, AddBookActivity.class);
                     startActivity(intent);
                 }
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                    R.id.nav_home, R.id.nav_books, R.id.nav_slideshow,
                     R.id.nav_tools, R.id.nav_share, R.id.nav_send, R.id.nav_profile_edit)
                     .setDrawerLayout(drawer)
                     .build();

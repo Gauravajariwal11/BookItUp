@@ -54,7 +54,8 @@ public class AddBookActivity extends AppCompatActivity {
     DatabaseReference newrecord;
     FirebaseDatabase database;
     int maxid=0;
-    BookActivity detail;
+    BookActivity detail = new BookActivity();
+    private FirebaseAuth firebaseAuth;
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -69,7 +70,6 @@ public class AddBookActivity extends AppCompatActivity {
         initializeUI();
         Nbook = findViewById(R.id.bookname);
         Nisbn=findViewById(R.id.isbn);
-        Ndate=findViewById(R.id.date);
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
         Ncondition=findViewById(R.id.condition);
@@ -77,6 +77,7 @@ public class AddBookActivity extends AppCompatActivity {
         Nsave=findViewById(R.id.save);
         detail=new BookActivity();
         newrecord= database.getInstance().getReference().child("BookList");
+
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,12 +100,14 @@ public class AddBookActivity extends AppCompatActivity {
 
             public void onClick(View view)
             {
-                detail.setXauthor(Nbook.getText().toString().trim());
+                detail.setXbook(Nbook.getText().toString().trim());
                 detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
                 detail.setXcondition(Ncondition.getText().toString().trim());
                 detail.setXdescription(Ndescription.getText().toString().trim());
+                detail.setXcondition(Ncondition.getText().toString().trim());
+                detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddBookActivity.this, MainActivity.class);
@@ -113,7 +116,7 @@ public class AddBookActivity extends AppCompatActivity {
             }
 
         });
-                detail.setXauthor(Ncondition.getText().toString().trim());
+
     }
     private void initializeUI() {
         entry_name = findViewById(R.id.bookname);
