@@ -77,7 +77,6 @@ public class AddBookActivity extends AppCompatActivity {
         Nsave=findViewById(R.id.save);
         detail=new BookActivity();
         newrecord= database.getInstance().getReference().child("BookList");
-
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -102,12 +101,15 @@ public class AddBookActivity extends AppCompatActivity {
             {
                 detail.setXauthor(Nbook.getText().toString().trim());
                 detail.setXisbn(Nisbn.getText().toString().trim());
-                detail.setXdate(getDateTime().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
+                detail.setXcondition(Ncondition.getText().toString().trim());
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AddBookActivity.this, MainActivity.class);
+                startActivity(intent);
+
             }
 
         });
