@@ -116,26 +116,7 @@ public class AddProfileActivity extends AppCompatActivity implements View.OnClic
         databaseReference.setValue(userinformation);
         Toast.makeText(getApplicationContext(),"User information updated",Toast.LENGTH_LONG).show();
     }
-    private void userLogedInInformation(){
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //retrieve user information from the database
-//                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
-                UserInformation userProfile = dataSnapshot.getValue(UserInformation.class);
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                editTextName.setText(userProfile.getfname());
-                editTextSurname.setText(userProfile.getlname());
-                textViewemailname.setText(user.getEmail());
-                editTextUniversity.setText(userProfile.getSchool());
-                editTextMajor.setText(userProfile.getMajor());
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
     @Override
     public void onClick(View view) {
             if (view == btnsave) {
@@ -159,7 +140,7 @@ public class AddProfileActivity extends AppCompatActivity implements View.OnClic
     private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         // Get "User UID" from Firebase > Authentification > Users.
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+//        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
         StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic"); //User id/Images/Profile Pic.jpg
         UploadTask uploadTask = imageReference.putFile(imagePath);
         uploadTask.addOnFailureListener(new OnFailureListener() {

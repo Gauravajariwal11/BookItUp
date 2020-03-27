@@ -37,8 +37,8 @@ public class BookDetailsView {
 
                 bookTV.setText(receivedBook.getXbook());
                 authorTV.setText(receivedBook.getXauthor());
-                editionTV.setText(receivedBook.getedition());
-                isbnTV.setText(receivedBook.getIsbn());
+                editionTV.setText(receivedBook.getXedition());
+                isbnTV.setText(receivedBook.getXisbn());
                 sellerTV.setText(receivedBook.getUid());
 
               //  mCollapsingToolbarLayout.setTitle(receivedScientist.getName());

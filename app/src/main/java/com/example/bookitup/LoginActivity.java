@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             final FirebaseUser user = mAuth.getCurrentUser();
                             user.isEmailVerified();
-                            if(!(user.isEmailVerified())){
+                            if(!user.isEmailVerified()){
                                 Toast.makeText(getApplicationContext(), "Please verify your email before login.", Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
                             }

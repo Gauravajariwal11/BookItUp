@@ -14,49 +14,28 @@
         android:layout_height="wrap_content"
         android:ems="50"
         android:inputType="textPersonName"
-        android:hint="Book name" />
-    <EditText
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textPersonName"
-        android:hint="Book cover image link" />
-    <EditText
-        android:id="@+id/edition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textPersonName"
-        android:hint="Edition" />
+        android:hint="Enter Book name here" />
     <EditText
         android:id="@+id/isbn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="13"
         android:inputType="textPersonName"
-        android:hint="ISBN" />
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:hint="Date" />
+        android:hint="Enter ISBN here" />
     <EditText
         android:id="@+id/author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="50"
         android:inputType="textPersonName"
-        android:hint="Author name" />
+        android:hint="Enter Author Name here" />
     <EditText
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="6"
         android:inputType="textPersonName"
-        android:hint="Price" />
+        android:hint="Enter Price here in $" />
     <EditText
         android:id="@+id/condition"
         android:layout_width="match_parent"
