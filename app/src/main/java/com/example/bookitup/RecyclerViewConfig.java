@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class RecyclerView_Config {
+public class RecyclerViewConfig {
     private Context mContext;
     private BooksAdapter mBooksAdapter;
     public void setConfig(RecyclerView recyclerView, Context context, List<BookActivity> books, List<String> keys,Boolean state){
@@ -32,20 +32,20 @@ public class RecyclerView_Config {
         private TextView mAuthor;
         private TextView mISBN;
         private TextView mEdition;
-        private TextView mCondition;
-        private TextView mPrice;
-        private TextView mDate;
-        private TextView mDescription;
+//        private TextView mCondition;
+//        private TextView mPrice;
+//        private TextView mDate;
+//        private TextView mDescription;
         private String mUid;
 
         private Boolean mstate;
         private String key;
         public BookItemView(ViewGroup parent){
             super(LayoutInflater.from(mContext).inflate(R.layout.list_view,parent,false));
-            mTitle = (TextView) itemView.findViewById(R.id.book_name_text);
-            mAuthor = (TextView) itemView.findViewById(R.id.author_name);
-            mEdition = (TextView) itemView.findViewById(R.id.edition);
-            mISBN = (TextView) itemView.findViewById(R.id.isbn);
+            mTitle = itemView.findViewById(R.id.book_name_text);
+            mAuthor = itemView.findViewById(R.id.author_name);
+            mEdition = itemView.findViewById(R.id.edition);
+            mISBN = itemView.findViewById(R.id.isbn);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 

@@ -1,4 +1,4 @@
-package com.example.bookitup.ui.tools;
+package com.example.bookitup.ui.chat;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

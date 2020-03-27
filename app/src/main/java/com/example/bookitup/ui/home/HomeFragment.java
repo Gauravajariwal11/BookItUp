@@ -10,21 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
-import com.example.bookitup.RecyclerView_Config;
+import com.example.bookitup.RecyclerViewConfig;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -127,7 +123,7 @@ public class HomeFragment extends Fragment {
         new BookDatabaseEdit().readBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys,false);
+                new RecyclerViewConfig().setConfig(mRecyclerView,getContext(),books,keys,false);
             }
 
             @Override

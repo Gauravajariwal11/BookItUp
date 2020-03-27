@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
-import com.example.bookitup.RecyclerView_Config;
+import com.example.bookitup.RecyclerViewConfig;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class BooksFragment extends Fragment {
         new BookDatabaseEdit().readMyBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys,true);
+                new RecyclerViewConfig().setConfig(mRecyclerView,getContext(),books,keys,true);
                 System.out.println(mRecyclerView+"\n"+getContext()+"\n"+books+"\n"+keys+"\n");
             }
 

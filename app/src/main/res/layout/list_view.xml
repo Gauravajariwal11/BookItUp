@@ -5,13 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-<<<<<<< HEAD
-    android:background="@drawable/background_border"
-=======
-    android:background="#5CE4F403"
->>>>>>> 1868f5688eaf2fb753635fb78a8a9876da5c34f3
-    android:clickable="true">
-
+    android:background="@drawable/background_border">
     <ImageView
         android:id="@+id/cover_image"
         android:layout_width="80dp"
@@ -32,12 +26,7 @@
         android:layout_marginRight="20dp"
         android:layout_toEndOf="@+id/cover_image"
         android:text="Book name"
-<<<<<<< HEAD
-        android:textColor="@color/colorPrimaryDark"
-=======
-        android:textColor="#555555"
->>>>>>> 1868f5688eaf2fb753635fb78a8a9876da5c34f3
-        android:textSize="18sp" />
+        android:textColor="@color/colorPrimaryDark"/>
 
 
     <TextView
@@ -50,12 +39,7 @@
         android:layout_marginRight="30dp"
         android:layout_toEndOf="@+id/cover_image"
         android:text="@string/by"
-<<<<<<< HEAD
-        android:textColor="@android:color/darker_gray"
-=======
-        android:textColor="#999999"
->>>>>>> 1868f5688eaf2fb753635fb78a8a9876da5c34f3
-        android:textSize="14sp" />
+        android:textColor="@android:color/darker_gray"/>
 
     <TextView
         android:id="@+id/edition"
@@ -67,13 +51,7 @@
         android:layout_marginRight="30dp"
         android:layout_toEndOf="@+id/cover_image"
         android:text="n edition"
-<<<<<<< HEAD
-        android:textColor="@android:color/darker_gray"
-=======
-        android:textColor="#999999"
->>>>>>> 1868f5688eaf2fb753635fb78a8a9876da5c34f3
-        android:textSize="14sp" />
-
+        android:textColor="@android:color/darker_gray"/>
     <TextView
         android:id="@+id/isbn"
         android:layout_width="wrap_content"
@@ -84,16 +62,6 @@
         android:layout_marginRight="30dp"
         android:layout_toEndOf="@+id/cover_image"
         android:text="ISBN"
-<<<<<<< HEAD
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />
-
-
-
-=======
-        android:textColor="#999999"
-        android:textSize="14sp" />
-
-
->>>>>>> 1868f5688eaf2fb753635fb78a8a9876da5c34f3
 </RelativeLayout>

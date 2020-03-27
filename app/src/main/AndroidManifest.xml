@@ -25,8 +25,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".AddBookActivity" />
-        <activity android:name=".AddProfileActivity"/>
-        <activity android:name=".ui.books.Edit_Delete"/>
+        <activity android:name=".AddProfileActivity" />
+        <activity android:name=".ui.books.Edit_Delete" />
     </application>
 
 </manifest>

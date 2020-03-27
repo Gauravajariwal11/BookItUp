@@ -56,11 +56,11 @@ public class AddBookActivity extends AppCompatActivity {
     int maxid=0;
     BookActivity detail = new BookActivity();
     private FirebaseAuth firebaseAuth;
-    private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
+//    private String getDateTime() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        Date date = new Date();
+//        return dateFormat.format(date);
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

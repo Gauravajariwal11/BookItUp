@@ -34,25 +34,13 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.bookitup.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.bookitup.ui.order.OrderHistoryFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_order" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.bookitup.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.bookitup.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/nav_chat"
         android:name="com.example.bookitup.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:label="@string/menu_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>
