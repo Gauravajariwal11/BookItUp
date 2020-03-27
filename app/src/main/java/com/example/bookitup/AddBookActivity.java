@@ -76,7 +76,7 @@ public class AddBookActivity extends AppCompatActivity {
         Ndescription=findViewById(R.id.description);
         Nsave=findViewById(R.id.save);
         detail=new BookActivity();
-        newrecord= database.getInstance().getReference().child("BookList");
+        newrecord= database.getInstance().getReference().child("Booklist");
 
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
