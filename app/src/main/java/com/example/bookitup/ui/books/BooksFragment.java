@@ -31,8 +31,11 @@ public class BooksFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         booksViewModel =
                 ViewModelProviders.of(this).get(BooksViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_books, container, false);
+
         final TextView textView = root.findViewById(R.id.text_gallery);
+
         booksViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -41,6 +44,7 @@ public class BooksFragment extends Fragment {
         });
 
         mRecyclerView = root.findViewById(R.id.recyclerview_mybooks);
+
         new BookDatabaseEdit().readMyBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
