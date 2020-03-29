@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookitup.ui.books.Edit_Delete;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.bookitup.ui.home.BookDetailsView;
 
 import java.util.List;
 
@@ -32,13 +32,9 @@ public class RecyclerViewConfig {
         private TextView mAuthor;
         private TextView mISBN;
         private TextView mEdition;
-//        private TextView mCondition;
-//        private TextView mPrice;
-//        private TextView mDate;
-//        private TextView mDescription;
         private String mUid;
 
-        private Boolean mstate;
+        private Boolean myState;
         private String key;
         public BookItemView(ViewGroup parent){
             super(LayoutInflater.from(mContext).inflate(R.layout.list_view,parent,false));
@@ -50,11 +46,10 @@ public class RecyclerViewConfig {
             itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-
                 public void onClick(View view) {
-                    if(mstate)
+                    if(myState)
                     {
-                        Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(mContext, Edit_Delete.class);
                         intent.putExtra("key",key);
@@ -62,12 +57,17 @@ public class RecyclerViewConfig {
                         intent.putExtra("author",mAuthor.getText().toString());
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
-                        //intent.putExtra("condition",mCondition.getText().toString());
-                        //intent.putExtra("isbn",mPrice.getText().toString());
-                        //intent.putExtra("isbn",mDate.getText().toString());
-                        //intent.putExtra("isbn",mDescription.getText().toString());
+                        mContext.startActivity(intent);
+                    }
+                    else {
+                        //Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
 
-
+                        Intent intent = new Intent(mContext, BookDetailsView.class);
+                        intent.putExtra("key",key);
+                        intent.putExtra("title",mTitle.getText().toString());
+                        intent.putExtra("author",mAuthor.getText().toString());
+                        intent.putExtra("edition",mEdition.getText().toString());
+                        intent.putExtra("isbn",mISBN.getText().toString());
                         mContext.startActivity(intent);
                     }
 
@@ -79,12 +79,8 @@ public class RecyclerViewConfig {
             mAuthor.setText(book.getXauthor());
             mEdition.setText(book.getXdescription());
             mISBN.setText(book.getXisbn());
-            //mCondition.setText(book.getXcondition());
-            //mPrice.setText(book.getXprice().toString());
-            //mDate.setText(book.getXdate());
-            //mDescription.setText(book.getXdescription());
             mUid = book.getXuid();
-            mstate=state;
+            myState =state;
             this.key = key;
         }
     }
@@ -92,12 +88,12 @@ public class RecyclerViewConfig {
     class BooksAdapter extends RecyclerView.Adapter<BookItemView>{
         private List<BookActivity> mBookList;
         private List<String> mKeys;
-        private Boolean mstate;
+        private Boolean mState;
 
         public BooksAdapter(List<BookActivity> mBookList, List<String> mKeys,Boolean state) {
             this.mBookList = mBookList;
             this.mKeys = mKeys;
-            this.mstate=state;
+            this.mState =state;
         }
 
 
@@ -108,7 +104,7 @@ public class RecyclerViewConfig {
 
         @Override
         public void onBindViewHolder( BookItemView holder, int position) {
-            holder.bind(mBookList.get(position), mKeys.get(position),mstate);
+            holder.bind(mBookList.get(position), mKeys.get(position), mState);
         }
 
         @Override

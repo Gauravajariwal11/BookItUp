@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/contactTV"
+                        android:id="@+id/contact"
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
@@ -161,10 +161,11 @@
                         android:background="@drawable/button_style"/>
 
                     <Button
+                        android:id='@+id/wishlist'
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_toEndOf="@id/contactTV"
+                        android:layout_toEndOf="@id/contact"
                         android:layout_gravity="center"
                         android:layout_marginEnd="30dp"
                         android:background="@drawable/button_style"

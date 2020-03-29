@@ -39,8 +39,8 @@ public class BookDatabaseEdit {
                     books.add(book);
                 }
                 dataStatus.DataIsLoaded(books,keys);
-                System.out.println(keys);
-                System.out.println(books);
+//                System.out.println(keys);
+//                System.out.println(books);
             }
 
 
@@ -98,5 +98,28 @@ public class BookDatabaseEdit {
             }
         });
 
+    }
+
+    public void readBooksFiltered(String searchString, String searchOption, final DataStatus dataStatus){
+        mReferenceBooks.orderByChild(searchOption)
+                .startAt(searchString)
+                .endAt(searchString + "\uf8ff")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        books.clear();
+                        List<String> keys = new ArrayList<>();
+                        for(DataSnapshot keyNode : dataSnapshot.getChildren()){
+                            BookActivity book = keyNode.getValue(BookActivity.class);
+                            keys.add(keyNode.getKey());
+                            books.add(book);
+                        }
+                        dataStatus.DataIsLoaded(books,keys);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+        });
     }
 }
