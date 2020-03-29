@@ -20,7 +20,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 
 public class AddBookActivity extends AppCompatActivity {
@@ -73,6 +77,9 @@ public class AddBookActivity extends AppCompatActivity {
         Ndescription=findViewById(R.id.description);
         Nsave=findViewById(R.id.save);
         detail=new BookActivity();
+        Timestamp ts=new Timestamp(System.currentTimeMillis());
+        final Date date=ts;
+
         newrecord= database.getInstance().getReference().child("Booklist");
 
         newrecord.addValueEventListener(new ValueEventListener() {
@@ -98,13 +105,14 @@ public class AddBookActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 detail.setXbook(Nbook.getText().toString().trim());
-                detail.setXedition(Nedition.getText().toString().trim());
+                detail.setEdition(Nedition.getText().toString().trim());
                 detail.setIsbn(Nisbn.getText().toString().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
+                detail.setDate(date.toString());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddBookActivity.this, MainActivity.class);

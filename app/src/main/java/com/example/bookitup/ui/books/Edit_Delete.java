@@ -84,11 +84,11 @@ public class Edit_Delete extends AppCompatActivity {
                 BookActivity book = new BookActivity();
                 book.setXbook(edBook.getText().toString());
                 book.setXauthor(edAuthor.getText().toString());
-                book.setXedition(edEdition.getText().toString());
+                book.setEdition(edEdition.getText().toString());
                 book.setIsbn(edIsbn.getText().toString());
                 book.setXcondition(edCondition.getText().toString());
                 book.setXprice(Float.parseFloat(edPrice.getText().toString()));
-                book.setXdate(edDate.getText().toString());
+                book.setDate(edDate.getText().toString());
                 book.setXdescription(edDescription.getText().toString());
 
                 new BookDatabaseEdit().updateBook(key, book, new BookDatabaseEdit.DataStatus() {
@@ -104,7 +104,7 @@ public class Edit_Delete extends AppCompatActivity {
 
                     @Override
                     public void DataIsUpdated() {
-                        Toast.makeText(Edit_Delete.this,"Book record has been Updated Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Edit_Delete.this,"Book record has been updated successfully",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -136,7 +136,7 @@ public class Edit_Delete extends AppCompatActivity {
 
                     @Override
                     public void DataIsDeleted() {
-                        Toast.makeText(Edit_Delete.this,"Book record has been Deleted Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Edit_Delete.this,"Book record has been deleted successfully",Toast.LENGTH_LONG).show();
                         finish();return;
                     }
                 });

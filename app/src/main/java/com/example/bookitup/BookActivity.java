@@ -1,5 +1,10 @@
 package com.example.bookitup;
 
+import com.google.firebase.database.ServerValue;
+
+import java.util.Date;
+
+
 public class BookActivity
 {
 
@@ -8,10 +13,9 @@ public class BookActivity
 
 
 
-    private String Xedition;
+    private String edition;
     private String isbn;
-    private String Xdate;
-
+    private String date;
     private Float Xprice;
     private String Xcondition;
     private String Xdescription;
@@ -33,13 +37,14 @@ public class BookActivity
         Xprice = xprice;
         Xcondition = xcondition;
         Xdescription = xdescription;
+        date = ServerValue.TIMESTAMP.toString();
     }
-    public String getXedition() {
-        return Xedition;
+    public String getEdition() {
+        return edition;
     }
 
-    public void setXedition(String xedition) {
-        Xedition = xedition;
+    public void setEdition(String edition) {
+        this.edition = edition;
     }
     public String getXbook() {
         return Xbook;
@@ -59,15 +64,14 @@ public class BookActivity
 
 
 
-
-
-    public String getXdate() {
-        return Xdate;
+    public void setDate(String date){
+        this.date = date;
     }
 
-    public void setXdate(String xdate) {
-        Xdate = xdate;
+    public String getDate() {
+        return date;
     }
+
 
     public String getXauthor() {
         return Xauthor;
@@ -102,10 +106,6 @@ public class BookActivity
     }
 
     public String getXuid() {
-        if(Xuid==null)
-        {
-            return " ";
-        }
         return Xuid;
     }
 

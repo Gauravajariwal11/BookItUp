@@ -2,7 +2,6 @@ package com.example.bookitup;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.bookitup.ui.books.Edit_Delete;
 import com.example.bookitup.ui.home.BookDetailsView;
-import com.facebook.stetho.inspector.jsonrpc.JsonRpcException;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -131,7 +129,7 @@ public class RecyclerViewConfig {
             mQueue.add(jsonObjectRequest);
             mTitle.setText(book.getXbook());
             mAuthor.setText("by "+book.getXauthor());
-            mEdition.setText(book.getXedition() +" edition");
+            mEdition.setText(book.getEdition() +" edition");
             mISBN.setText("ISBN: "+book.getIsbn());
 
             mUid = book.getXuid();

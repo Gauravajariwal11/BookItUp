@@ -18,27 +18,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/coverIM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_nocover"/>
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Book info"
-                    android:textStyle="italic"
-                    android:textSize="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorPrimaryDark" />
-
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,19 +29,28 @@
                         android:orientation="vertical">
 
 
-
+                        <ImageView
+                            android:id="@+id/coverIM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_nocover"/>
                         <TextView
                             android:id="@+id/bookTV"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:textColor="@color/colorAccent"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorPrimary"
                             android:text="Book Name" />
                         <TextView
                             android:id="@+id/authorTV"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
+                            android:textAlignment="center"
                             android:text="by Author" />
 
                         <TextView
@@ -70,12 +58,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
+                            android:textAlignment="center"
                             android:text="Edition" />
                         <TextView
                             android:id="@+id/isbnTV"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
+                            android:textAlignment="center"
                             android:text="ISBN" />
 
 
@@ -88,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Buying options"
+                    android:text="Buying Information"
                     android:textStyle="italic"
                     android:textSize="15dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
