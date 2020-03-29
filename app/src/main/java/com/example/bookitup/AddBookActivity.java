@@ -26,9 +26,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +52,15 @@ import java.util.TimeZone;
 
 public class AddBookActivity extends AppCompatActivity {
     private EditText entry_name;
+    private Spinner bookCondition;
     EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Ncondition,Ndescription;
     Button Nsave;
     DatabaseReference newrecord;
     FirebaseDatabase database;
     int maxid=0;
+    String condition;
+
+
     BookActivity detail = new BookActivity();
     private FirebaseAuth firebaseAuth;
 //    private String getDateTime() {
@@ -72,7 +79,23 @@ public class AddBookActivity extends AppCompatActivity {
         Nisbn=findViewById(R.id.isbn);
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
-        Ncondition=findViewById(R.id.condition);
+        //drop down menu
+        bookCondition = findViewById(R.id.book_condition);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                R.array.book_condition, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bookCondition.setAdapter(adapter);
+        bookCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                condition = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         Ndescription=findViewById(R.id.description);
         Nsave=findViewById(R.id.save);
         detail=new BookActivity();
@@ -106,7 +129,7 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
                 detail.setXcondition(Ncondition.getText().toString().trim());
                 detail.setXdescription(Ndescription.getText().toString().trim());
-                detail.setXcondition(Ncondition.getText().toString().trim());
+                detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();

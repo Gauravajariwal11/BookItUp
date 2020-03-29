@@ -33,4 +33,13 @@
         <item>Author</item>
         <item>ISBN</item>
     </string-array>
+
+    <string-array name="book_condition">
+        <item>Like new</item>
+        <item>Very good</item>
+        <item>Good</item>
+        <item>Fair</item>
+        <item>Poor</item>
+    </string-array>
+
 </resources>

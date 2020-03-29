@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment {
 
         //drop down menu
         mSearchOptions = view.findViewById(R.id.search_options);
-        //bot-ann
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(homeContext,
                 R.array.search_options, android.R.layout.simple_spinner_item);

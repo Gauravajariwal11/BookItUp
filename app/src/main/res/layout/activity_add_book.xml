@@ -2,58 +2,150 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    tools:context=".MainActivity">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/bookname"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textPersonName"
-        android:hint="Enter Book name here" />
-    <EditText
-        android:id="@+id/isbn"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Book name:"/>
+        <EditText
+            android:id="@+id/bookname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:ems="50"
+            android:inputType="textPersonName"
+            android:hint="Enter Book name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="13"
-        android:inputType="textPersonName"
-        android:hint="Enter ISBN here" />
-    <EditText
-        android:id="@+id/author"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Book ISBN:"/>
+        <EditText
+            android:id="@+id/isbn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="13"
+            android:layout_marginStart="30dp"
+            android:inputType="textPersonName"
+            android:hint="Enter ISBN" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textPersonName"
-        android:hint="Enter Author Name here" />
-    <EditText
-        android:id="@+id/price"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Author:"/>
+        <EditText
+            android:id="@+id/author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="50"
+            android:layout_marginStart="30dp"
+            android:inputType="textPersonName"
+            android:hint="Enter Author Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="6"
-        android:inputType="textPersonName"
-        android:hint="Enter Price here in $" />
-    <EditText
-        android:id="@+id/condition"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Price:"/>
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="6"
+            android:inputType="textPersonName"
+            android:layout_marginStart="30dp"
+            android:hint="Enter Price" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textPersonName"
-        android:hint="Enter Condition here" />
-    <EditText
-        android:id="@+id/description"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Book condition:"/>
+        <Spinner
+            android:id="@+id/book_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="0dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="50"
-        android:inputType="textLongMessage"
-        android:hint="Description" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Descriptions:"/>
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="50"
+            android:layout_marginStart="30dp"
+            android:inputType="textLongMessage"
+            android:hint="Descriptions" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save" />
+        android:layout_width="152dp"
+        android:layout_height="64dp"
+        android:background="@drawable/button_style"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:text="Save"
+        android:textColor="@color/colorWhite" />
 </LinearLayout>
