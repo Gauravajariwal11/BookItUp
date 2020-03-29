@@ -1,13 +1,11 @@
 package com.example.bookitup.ui.books;
 
 import android.annotation.SuppressLint;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -88,7 +85,7 @@ public class Edit_Delete extends AppCompatActivity {
                 book.setXbook(edBook.getText().toString());
                 book.setXauthor(edAuthor.getText().toString());
                 book.setXedition(edEdition.getText().toString());
-                book.setXisbn(edIsbn.getText().toString());
+                book.setIsbn(edIsbn.getText().toString());
                 book.setXcondition(edCondition.getText().toString());
                 book.setXprice(Float.parseFloat(edPrice.getText().toString()));
                 book.setXdate(edDate.getText().toString());

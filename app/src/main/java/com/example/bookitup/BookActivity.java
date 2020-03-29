@@ -1,8 +1,5 @@
 package com.example.bookitup;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class BookActivity
 {
 
@@ -12,7 +9,7 @@ public class BookActivity
 
 
     private String Xedition;
-    private String Xisbn;
+    private String isbn;
     private String Xdate;
 
     private Float Xprice;
@@ -29,9 +26,9 @@ public class BookActivity
     public BookActivity() {
     }
 
-    public BookActivity(String xbook, String xisbn, String xauthor, Float xprice, String xcondition, String xdescription) {
+    public BookActivity(String xbook, String isbn, String xauthor, Float xprice, String xcondition, String xdescription) {
         Xbook = xbook;
-        Xisbn = xisbn;
+        this.isbn = isbn;
         Xauthor = xauthor;
         Xprice = xprice;
         Xcondition = xcondition;
@@ -52,11 +49,11 @@ public class BookActivity
         Xbook = xbook;
     }
 
-    public String getXisbn() {
-        return Xisbn;
+    public String getIsbn() {
+        return isbn;
     }
-    public void setXisbn(String xisbn) {
-        Xisbn = xisbn;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
 
