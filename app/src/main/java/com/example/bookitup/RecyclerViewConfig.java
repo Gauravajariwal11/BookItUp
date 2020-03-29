@@ -77,12 +77,8 @@ public class RecyclerViewConfig {
         public void bind(BookActivity book, String key, Boolean state){
             mTitle.setText(book.getXbook());
             mAuthor.setText(book.getXauthor());
-            mEdition.setText(book.getXdescription());
+            mEdition.setText(book.getXedition());
             mISBN.setText(book.getXisbn());
-            //mCondition.setText(book.getXcondition());
-            //mPrice.setText(book.getXprice().toString());
-            //mDate.setText(book.getXdate());
-            //mDescription.setText(book.getXdescription());
             mUid = book.getXuid();
             mstate=state;
             this.key = key;

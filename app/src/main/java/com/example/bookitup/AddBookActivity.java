@@ -53,7 +53,7 @@ import java.util.TimeZone;
 public class AddBookActivity extends AppCompatActivity {
     private EditText entry_name;
     private Spinner bookCondition;
-    EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Ncondition,Ndescription;
+    EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Nedition,Ndescription;
     Button Nsave;
     DatabaseReference newrecord;
     FirebaseDatabase database;
@@ -79,6 +79,7 @@ public class AddBookActivity extends AppCompatActivity {
         Nisbn=findViewById(R.id.isbn);
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
+        Nedition=findViewById(R.id.bookEdition);
         //drop down menu
         bookCondition = findViewById(R.id.book_condition);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
@@ -124,10 +125,10 @@ public class AddBookActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 detail.setXbook(Nbook.getText().toString().trim());
+                detail.setXedition(Nedition.getText().toString().trim());
                 detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
                 detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
-                detail.setXcondition(Ncondition.getText().toString().trim());
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
