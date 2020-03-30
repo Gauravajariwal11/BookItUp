@@ -1,12 +1,18 @@
 package com.example.bookitup.ui.home;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -15,6 +21,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageProxy;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,12 +32,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
+import com.example.bookitup.MainActivity;
 import com.example.bookitup.R;
 import com.example.bookitup.RecyclerView_Config;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.otaliastudios.cameraview.CameraView;
+import com.otaliastudios.cameraview.frame.Frame;
+import com.otaliastudios.cameraview.frame.FrameProcessor;
+
 
 import java.util.List;
 
@@ -47,11 +76,31 @@ public class HomeFragment extends Fragment {
     private Context homeContext;
 
     private String option;
-    FirebaseRecyclerAdapter<BookActivity,BooksViewHolder> adapter;
+    FirebaseRecyclerAdapter<BookActivity, BooksViewHolder> adapter;
+
+    private final int BARCODE_SCAN_REQ_CODE = 200;
+
+    CameraView camera_view;
+    Boolean isDetected = false;
+    Button btn_start_again;
+
+    // FirebaseVisionBarcodeDetectorOptions options;
+    // FirebaseVisionBarcodeDetector detector;
+    private HomeFragment HomeFragment;
+
+    FirebaseVisionBarcodeDetectorOptions options =
+            new FirebaseVisionBarcodeDetectorOptions.Builder()
+                    .setBarcodeFormats(
+                            FirebaseVisionBarcode.FORMAT_EAN_13)
+                    .build();
+
+    FirebaseVisionBarcodeDetector detector = FirebaseVision.getInstance()
+            .getVisionBarcodeDetector();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //top-ann
@@ -84,9 +133,6 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-
         mResultList = view.findViewById(R.id.result_list);
         mResultList.setHasFixedSize(true);
         mResultList.setLayoutManager(new LinearLayoutManager(homeContext));
@@ -95,7 +141,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String searchOption = "";
-                switch (option){
+                switch (option) {
                     case "Book":
                         searchOption = "xbook";
                         break;
@@ -114,20 +160,13 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
-
         //noel
         //piling all books on the main page
         mRecyclerView = view.findViewById(R.id.result_list);
         new BookDatabaseEdit().readBooks(new BookDatabaseEdit.DataStatus() {
             @Override
             public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView,getContext(),books,keys,false);
+                new RecyclerView_Config().setConfig(mRecyclerView, getContext(), books, keys, false);
             }
 
             @Override
@@ -150,8 +189,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
     //search for books
     private void firebaseBooksSearch(String searchText, String searchOption) {
 
@@ -160,8 +197,6 @@ public class HomeFragment extends Fragment {
         Query firebaseSearchQuery = mUserDatabase.orderByChild(searchOption)
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff");
-
-
 
 
         adapter = new FirebaseRecyclerAdapter<BookActivity, BooksViewHolder>(
@@ -186,4 +221,7 @@ public class HomeFragment extends Fragment {
 
         mResultList.setAdapter(adapter);
     }
+
+
 }
+

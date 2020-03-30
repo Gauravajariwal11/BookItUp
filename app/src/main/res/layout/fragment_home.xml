@@ -59,4 +59,19 @@
         android:layout_below="@+id/search_field"
         android:layout_marginTop="50dp"></androidx.recyclerview.widget.RecyclerView>
 
+
+
+<!--    <com.otaliastudios.cameraview.CameraView-->
+<!--        android:id="@+id/cameraView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content" />-->
+
+    <Button
+        android:id="@+id/Scan_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:text="Scan"
+        android:onClick="barcodeScan"/>
+
 </RelativeLayout>
