@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.bookitup.ui.books.Edit_Delete;
+import com.example.bookitup.ui.books.MyBookView;
 import com.example.bookitup.ui.home.BookDetailsView;
 
 import org.json.JSONObject;
@@ -67,7 +68,7 @@ public class RecyclerViewConfig {
                     {
                         //Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(mContext, Edit_Delete.class);
+                        Intent intent = new Intent(mContext, MyBookView.class);
                         intent.putExtra("key",key);
                         intent.putExtra("title",mTitle.getText().toString());
                         intent.putExtra("author",mAuthor.getText().toString());

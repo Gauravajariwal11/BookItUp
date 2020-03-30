@@ -26,7 +26,6 @@ public class BooksFragment extends Fragment {
     private BooksViewModel booksViewModel;
     private RecyclerView mRecyclerView;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         booksViewModel =
@@ -36,7 +35,7 @@ public class BooksFragment extends Fragment {
 
         final TextView textView = root.findViewById(R.id.text_gallery);
 
-        booksViewModel.getText().observe(this, new Observer<String>() {
+        booksViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

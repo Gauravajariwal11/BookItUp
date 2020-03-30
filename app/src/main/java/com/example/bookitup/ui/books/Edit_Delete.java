@@ -1,6 +1,7 @@
 package com.example.bookitup.ui.books;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,11 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class Edit_Delete extends AppCompatActivity {
-    private ImageView edImage;
     private EditText edBook;
     private EditText edAuthor;
     private EditText edEdition;
@@ -37,8 +39,11 @@ public class Edit_Delete extends AppCompatActivity {
     private String date;
     private String description;
 
-    private Button edEdit_info;
-    private Button edDelete;
+    private Button saveBtn;
+    private Button cancelBtn;
+
+    private DatabaseReference myRef;
+    private FirebaseDatabase database;
 
 
     @SuppressLint("WrongViewCast")
@@ -53,9 +58,10 @@ public class Edit_Delete extends AppCompatActivity {
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
         condition = getIntent().getStringExtra("condition");
-        price = getIntent().getFloatExtra("price", (float) 21.2);
+        price = getIntent().getFloatExtra("price", (float) 0.0);
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
+
 
         edBook =  (EditText) findViewById(R.id.bookBED);
         edBook.setText(book);
@@ -74,10 +80,10 @@ public class Edit_Delete extends AppCompatActivity {
         edDescription = (EditText) findViewById(R.id.descriptionBED);
         edDescription.setText(description);
 
-        edEdit_info = (Button) findViewById(R.id.edit_infoBED);
-        edDelete = (Button) findViewById(R.id.deleteBED);
+        saveBtn = (Button) findViewById(R.id.save);
+        cancelBtn = (Button) findViewById(R.id.cancel);
 
-        edEdit_info.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -114,32 +120,12 @@ public class Edit_Delete extends AppCompatActivity {
                 });
             }
         });
-        edDelete.setOnClickListener(new View.OnClickListener(){
+        cancelBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
-                new BookDatabaseEdit().deleteBook(key, new BookDatabaseEdit.DataStatus() {
-                    @Override
-                    public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
-
-                    }
-
-                    @Override
-                    public void DataIsInserted() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-                        Toast.makeText(Edit_Delete.this,"Book record has been deleted successfully",Toast.LENGTH_LONG).show();
-                        finish();return;
-                    }
-                });
+                Intent intent = new Intent(Edit_Delete.this, MyBookView.class);
+                startActivity(intent);
             }
         });
     }

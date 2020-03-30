@@ -141,27 +141,27 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/contact"
+                        android:id="@+id/edit"
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="20dp"
-                        android:text="Contact Seller"
+                        android:text="Edit Book Info"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp"
                         android:background="@drawable/button_style"/>
 
                     <Button
-                        android:id='@+id/wishlist'
+                        android:id='@+id/delete'
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_toEndOf="@id/contact"
+                        android:layout_toEndOf="@id/edit"
                         android:layout_gravity="center"
                         android:layout_marginEnd="30dp"
                         android:background="@drawable/button_style"
-                        android:text="Add to wish list"
+                        android:text="Delete Book"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp" />
                 </RelativeLayout>

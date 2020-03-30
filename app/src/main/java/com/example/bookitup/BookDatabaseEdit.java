@@ -1,5 +1,7 @@
 package com.example.bookitup;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,8 +41,8 @@ public class BookDatabaseEdit {
                     books.add(book);
                 }
                 dataStatus.DataIsLoaded(books,keys);
-//                System.out.println(keys);
-//                System.out.println(books);
+                System.out.println(keys);
+                System.out.println(books);
             }
 
 
@@ -60,11 +62,15 @@ public class BookDatabaseEdit {
                     BookActivity book = keyNode.getValue(BookActivity.class);
                     System.out.println(book);
                     System.out.println(keyNode.getKey());
-                    if(book.getXuid().equals(firebaseAuth.getInstance().getCurrentUser().getUid()))
-                    {
-                        keys.add(keyNode.getKey());
+                    try {
+                        if (book.getXuid().equals(firebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            keys.add(keyNode.getKey());
 
-                        books.add(book);
+                            books.add(book);
+                        }
+                    }
+                    catch (NullPointerException e){
+                        Log.getStackTraceString(e);
                     }
 
                 }

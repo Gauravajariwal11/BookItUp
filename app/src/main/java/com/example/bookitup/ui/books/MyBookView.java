@@ -1,13 +1,11 @@
-package com.example.bookitup.ui.home;
+package com.example.bookitup.ui.books;
 
 import android.annotation.SuppressLint;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
-import com.example.bookitup.RecyclerViewConfig;
 import com.example.bookitup.UserInformation;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class BookDetailsView extends AppCompatActivity {
+public class MyBookView extends AppCompatActivity {
     private TextView edBook;
     private TextView edAuthor;
     private TextView edEdition;
@@ -63,8 +58,8 @@ public class BookDetailsView extends AppCompatActivity {
     private String description;
     private String seller;
 
-    private Button contactBtn;
-    private Button wishlistBtn;
+    private Button editBtn;
+    private Button deleteBtn;
 
     private FirebaseDatabase database;
 
@@ -80,7 +75,7 @@ public class BookDetailsView extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseRef = database.getReference("Booklist");
-        setContentView(R.layout.book_details);
+        setContentView(R.layout.my_book_view);
         bookActivity = new BookActivity();
         mImage = findViewById(R.id.coverIM);
         key = getIntent().getStringExtra("key");
@@ -193,7 +188,42 @@ public class BookDetailsView extends AppCompatActivity {
         edDescription = findViewById(R.id.descriptionTV);
         edDescription.setText(description);
 
-        contactBtn = findViewById(R.id.contact);
-        wishlistBtn = findViewById(R.id.wishlist);
+        editBtn = findViewById(R.id.edit);
+        deleteBtn = findViewById(R.id.delete);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyBookView.this,Edit_Delete.class);
+                startActivity(intent);
+            }
+        });
+        deleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                new BookDatabaseEdit().deleteBook(key, new BookDatabaseEdit.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<BookActivity> books, List<String> keys) {
+
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+                        Toast.makeText(MyBookView.this,"Book record has been deleted successfully",Toast.LENGTH_LONG).show();
+                        finish();return;
+                    }
+                });
+            }
+        });
     }
 }

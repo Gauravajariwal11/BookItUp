@@ -19,13 +19,6 @@ public class BookActivity
     private Float Xprice;
     private String Xcondition;
     private String Xdescription;
-
-
-    private String uid;
-
-
-
-    private String Ximage;
     private String Xuid;
     public BookActivity() {
     }
@@ -112,18 +105,5 @@ public class BookActivity
     public void setXuid(String xuid) {
         Xuid = xuid;
     }
-    public String getXimage() {
-        return Ximage;
-    }
 
-    public void setXimage(String ximage) {
-        Ximage = ximage;
-    }
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 }

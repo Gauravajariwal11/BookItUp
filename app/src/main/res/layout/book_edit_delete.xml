@@ -144,27 +144,27 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/edit_infoBED"
+                        android:id="@+id/save"
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/button_style"
-                        android:text="Edit Info"
+                        android:text="Save"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp" />
 
                     <Button
-                        android:id="@+id/deleteBED"
+                        android:id="@+id/cancel"
                         android:layout_width="143dp"
                         android:layout_height="50dp"
                         android:layout_alignParentEnd="true"
                         android:layout_gravity="center"
                         android:layout_marginEnd="30dp"
-                        android:layout_toEndOf="@id/edit_infoBED"
+                        android:layout_toEndOf="@id/save"
                         android:background="@drawable/button_style"
-                        android:text="Delete"
+                        android:text="Cancel"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp" />
                 </RelativeLayout>

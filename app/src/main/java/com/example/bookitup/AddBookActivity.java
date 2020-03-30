@@ -2,6 +2,7 @@ package com.example.bookitup;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,6 @@ public class AddBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_add_book);
-        initializeUI();
         Nbook = findViewById(R.id.bookname);
         Nisbn=findViewById(R.id.isbn);
         Nauthor=findViewById(R.id.author);
@@ -113,8 +113,11 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 detail.setDate(date.toString());
+                if (TextUtils.isEmpty(detail.getXbook())) {
+                    Nbook.setError("Book name cannot be empty");
+                }
                 newrecord.child(String.valueOf(maxid+1)).setValue(detail);
-                Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(AddBookActivity.this,"Book added successfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddBookActivity.this, MainActivity.class);
                 startActivity(intent);
 

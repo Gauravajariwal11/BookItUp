@@ -29,6 +29,7 @@
         <activity android:name=".AddProfileActivity" />
         <activity android:name=".ui.books.Edit_Delete" />
         <activity android:name=".ui.home.BookDetailsView"/>
+        <activity android:name=".ui.books.MyBookView"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
