@@ -104,6 +104,7 @@ public class AddBookActivity extends AppCompatActivity {
 
             public void onClick(View view)
             {
+                try{
                 detail.setXbook(Nbook.getText().toString().trim());
                 detail.setEdition(Nedition.getText().toString().trim());
                 detail.setIsbn(Nisbn.getText().toString().trim());
@@ -112,7 +113,10 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
-                detail.setDate(date.toString());
+                detail.setDate(date.toString());}
+                catch(Exception e){
+                    System.out.println(e);
+                }
                 if (TextUtils.isEmpty(detail.getXbook())) {
                     Nbook.setError("Book name cannot be empty");
                 }

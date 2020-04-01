@@ -95,15 +95,15 @@ public class BookDetailsView extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
                             condition = data.getValue(BookActivity.class).getXcondition();
-                            edCondition.setText("Book condition: " +condition);
+                            edCondition.setText("Book condition: " + condition);
                             price = data.getValue(BookActivity.class).getXprice();
                             edPrice.setText("Listed for: $" + price.toString());
                             description = data.getValue(BookActivity.class).getXdescription();
                             edDescription.setText("Description: " + description.toString());
                             date = data.getValue(BookActivity.class).getDate();
-                            edDate.setText("Date posted: " + date.substring(0,10));
+                            edDate.setText("Date posted: " + date.substring(0, 10));
                             seller = data.getValue(BookActivity.class).getXuid();
                             //Retrieve seller info
                             final DatabaseReference databaseUserRef = database.getReference("Users");
@@ -111,7 +111,7 @@ public class BookDetailsView extends AppCompatActivity {
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for(DataSnapshot data: dataSnapshot.getChildren()){
+                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
                                                 String sellerName = "Listed by: " + data.getValue(UserInformation.class).getfname() + " "
                                                         + data.getValue(UserInformation.class).getlname();
                                                 eSeller = findViewById(R.id.sellerTV);
@@ -119,6 +119,7 @@ public class BookDetailsView extends AppCompatActivity {
 
                                             }
                                         }
+
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -127,6 +128,7 @@ public class BookDetailsView extends AppCompatActivity {
 
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -134,14 +136,12 @@ public class BookDetailsView extends AppCompatActivity {
                 });
 
 
-
-
-        price = getIntent().getFloatExtra("price", (float)0.0);
+        price = getIntent().getFloatExtra("price", (float) 0.0);
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
         //getting book cover
         mQueue = Volley.newRequestQueue(getApplicationContext());
-        String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn.substring(6) ;
+        String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn.substring(6);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
@@ -151,10 +151,10 @@ public class BookDetailsView extends AppCompatActivity {
                             for (int i = 0; i < items.length(); i++) {
                                 JSONObject jsonObject1 = items.getJSONObject(i);
                                 JSONObject volumeInfo = jsonObject1.getJSONObject("volumeInfo");
-                                if(volumeInfo.has("imageLinks")){
+                                if (volumeInfo.has("imageLinks")) {
                                     JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                                     String imgLink = imageLinks.getString("smallThumbnail").substring(4);
-                                    Glide.with(getApplicationContext()).load("https"+imgLink).error(R.drawable.ic_nocover).into(mImage);
+                                    Glide.with(getApplicationContext()).load("https" + imgLink).error(R.drawable.ic_nocover).into(mImage);
 
                                     System.out.println(imgLink);
 
@@ -176,7 +176,6 @@ public class BookDetailsView extends AppCompatActivity {
         mQueue.add(jsonObjectRequest);
 
 
-
         edBook = findViewById(R.id.bookTV);
         edBook.setText(book);
         edAuthor = findViewById(R.id.authorTV);
@@ -185,7 +184,7 @@ public class BookDetailsView extends AppCompatActivity {
         edEdition.setText(edition);
         edIsbn = findViewById(R.id.isbnTV);
         edIsbn.setText(isbn);
-        edCondition =  findViewById(R.id.conditionTV);
+        edCondition = findViewById(R.id.conditionTV);
         edPrice = findViewById(R.id.priceTV);
         edPrice.setText(price.toString());
         edDate = findViewById(R.id.dateTV);

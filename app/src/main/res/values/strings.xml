@@ -12,10 +12,11 @@
     <string name="action_edit_profile">Edit Profile</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_books">My Books</string>
+    <string name="menu_books">My Books Listing</string>
     <string name="menu_order">Order History</string>
     <string name="menu_chat">Chat</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_wishlist">My Wish list</string>
 
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="change_password"> <u>Change Password</u></string>
