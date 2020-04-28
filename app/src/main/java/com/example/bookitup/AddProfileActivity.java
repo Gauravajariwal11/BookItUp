@@ -110,7 +110,8 @@ public class AddProfileActivity extends AppCompatActivity implements View.OnClic
         String surname = editTextSurname.getText().toString().trim();
         String university = editTextUniversity.getText().toString().trim();
         String major = editTextMajor.getText().toString().trim();
-        UserInformation userinformation = new UserInformation(name,surname,university,major);
+        String email = textViewemailname.toString().trim();
+        UserInformation userinformation = new UserInformation(name,surname,university,major,email);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         databaseReference.setValue(userinformation);

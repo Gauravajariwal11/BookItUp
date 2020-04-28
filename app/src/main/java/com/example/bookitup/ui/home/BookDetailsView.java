@@ -1,6 +1,7 @@
 package com.example.bookitup.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,9 +26,11 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
+import com.example.bookitup.FirebaseMethods;
 import com.example.bookitup.R;
 import com.example.bookitup.RecyclerViewConfig;
 import com.example.bookitup.UserInformation;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -62,12 +67,19 @@ public class BookDetailsView extends AppCompatActivity {
     private String date;
     private String description;
     private String seller;
+    private String seller_email;
 
     private Button contactBtn;
-    private Button wishlistBtn;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private FirebaseDatabase database;
 
+    private DatabaseReference ChatRequestsRef, UsersRef, ContactsRef;
+    private FirebaseAuth mAuth;
+    private String currentUserID;
 
     private RequestQueue mQueue;
     BookActivity bookActivity;
@@ -81,6 +93,22 @@ public class BookDetailsView extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseRef = database.getReference("Booklist");
         setContentView(R.layout.book_details);
+
+//        //recycler view
+//        recyclerView = (RecyclerView) findViewById(R.id.sellerList);
+//
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        recyclerView.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+
+//        // specify an adapter (see also next example)
+//        mAdapter = new SellerAdapter(myDataset);
+
+//        recyclerView.setAdapter(mAdapter);
         bookActivity = new BookActivity();
         mImage = findViewById(R.id.coverIM);
         key = getIntent().getStringExtra("key");
@@ -88,6 +116,14 @@ public class BookDetailsView extends AppCompatActivity {
         author = getIntent().getStringExtra("author");
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
+
+        //Database ref for contact a seller
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
+
+
         //Call from database Booklist
         String searchString = isbn.substring(6);
         databaseRef.orderByChild("isbn")
@@ -114,6 +150,7 @@ public class BookDetailsView extends AppCompatActivity {
                                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                                 String sellerName = "Listed by: " + data.getValue(UserInformation.class).getfname() + " "
                                                         + data.getValue(UserInformation.class).getlname();
+                                                seller_email = data.getValue(UserInformation.class).getEmail().trim();
                                                 eSeller = findViewById(R.id.sellerTV);
                                                 eSeller.setText(sellerName);
 
@@ -175,6 +212,26 @@ public class BookDetailsView extends AppCompatActivity {
                 });
         mQueue.add(jsonObjectRequest);
 
+        //Contact Seller
+        contactBtn = findViewById(R.id.contact);
+
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{seller_email});
+                i.putExtra(Intent.EXTRA_SUBJECT, "BookItUp - Inquiry for: " + book.trim());
+                i.putExtra(Intent.EXTRA_TEXT   , "Is it still available?");
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(BookDetailsView.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
         edBook = findViewById(R.id.bookTV);
         edBook.setText(book);
@@ -192,7 +249,7 @@ public class BookDetailsView extends AppCompatActivity {
         edDescription = findViewById(R.id.descriptionTV);
         edDescription.setText(description);
 
-        contactBtn = findViewById(R.id.contact);
-        wishlistBtn = findViewById(R.id.wishlist);
+
+
     }
 }
