@@ -28,7 +28,7 @@ public class RecyclerView_Config {
     }
 
     class BookItemView extends RecyclerView.ViewHolder {
-        private TextView mTitle;
+        private TextView mBook;
         private TextView mAuthor;
         private TextView mISBN;
         private TextView mEdition;
@@ -36,16 +36,21 @@ public class RecyclerView_Config {
         private TextView mPrice;
         private TextView mDate;
         private TextView mDescription;
-        private String mUid;
+        private TextView mUid;
 
         private Boolean mstate;
         private String key;
         public BookItemView(ViewGroup parent){
             super(LayoutInflater.from(mContext).inflate(R.layout.list_view,parent,false));
-            mTitle = (TextView) itemView.findViewById(R.id.book_name_text);
+            mBook = (TextView) itemView.findViewById(R.id.book_name_text);
             mAuthor = (TextView) itemView.findViewById(R.id.author_name);
             mEdition = (TextView) itemView.findViewById(R.id.edition);
             mISBN = (TextView) itemView.findViewById(R.id.isbn);
+            mCondition = (TextView) itemView.findViewById(R.id.condition);
+            mPrice = (TextView) itemView.findViewById(R.id.price);
+            mDate = (TextView) itemView.findViewById(R.id.date);
+            mDescription = (TextView) itemView.findViewById(R.id.description);
+            mUid = (TextView) itemView.findViewById(R.id.uid);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -58,14 +63,17 @@ public class RecyclerView_Config {
 
                         Intent intent = new Intent(mContext, Edit_Delete.class);
                         intent.putExtra("key",key);
-                        intent.putExtra("title",mTitle.getText().toString());
+                        intent.putExtra("book",mBook.getText().toString());
                         intent.putExtra("author",mAuthor.getText().toString());
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
-                        //intent.putExtra("condition",mCondition.getText().toString());
-                        //intent.putExtra("isbn",mPrice.getText().toString());
-                        //intent.putExtra("isbn",mDate.getText().toString());
-                        //intent.putExtra("isbn",mDescription.getText().toString());
+
+                        //these not needed
+                        intent.putExtra("condition",mCondition.getText().toString());
+                        intent.putExtra("price",mPrice.getText().toString());
+                        intent.putExtra("date",mDate.getText().toString());
+                        intent.putExtra("description",mDescription.getText().toString());
+                        intent.putExtra("uid",mUid.getText().toString());
 
 
                         mContext.startActivity(intent);
@@ -75,15 +83,15 @@ public class RecyclerView_Config {
             });
         }
         public void bind(BookActivity book, String key, Boolean state){
-            mTitle.setText(book.getXbook());
+            mBook.setText(book.getXbook());
             mAuthor.setText(book.getXauthor());
             mEdition.setText(book.getXdescription());
             mISBN.setText(book.getXisbn());
-            //mCondition.setText(book.getXcondition());
-            //mPrice.setText(book.getXprice().toString());
-            //mDate.setText(book.getXdate());
-            //mDescription.setText(book.getXdescription());
-            mUid = book.getXuid();
+            mCondition.setText(book.getXcondition());
+            mPrice.setText(book.getXprice().toString());
+            mDate.setText(book.getXdate());
+            mDescription.setText(book.getXdescription());
+            mUid.setText(book.getXuid());
             mstate=state;
             this.key = key;
         }

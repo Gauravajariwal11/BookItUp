@@ -63,7 +63,7 @@ public class AddBookActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState)
-    {
+    { //creating xml for add book button
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_add_book);
@@ -100,6 +100,7 @@ public class AddBookActivity extends AppCompatActivity {
 
             public void onClick(View view)
             {
+                //adding new database on Firebase
                 detail.setXbook(Nbook.getText().toString().trim());
                 detail.setXisbn(Nisbn.getText().toString().trim());
                 detail.setXdate(getDateTime().trim());
@@ -110,6 +111,7 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
                 newrecord.push().setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added sucessfully",Toast.LENGTH_LONG).show();
+                finish();
             }
 
         });

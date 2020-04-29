@@ -3,6 +3,7 @@ package com.example.bookitup.ui.books;
 import android.annotation.SuppressLint;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +37,7 @@ public class Edit_Delete extends AppCompatActivity {
     private String edition;
     private String isbn;
     private String condition;
-    private Float price;
+    private String price;
     private String date;
     private String description;
 
@@ -56,7 +57,7 @@ public class Edit_Delete extends AppCompatActivity {
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
         condition = getIntent().getStringExtra("condition");
-        price = getIntent().getFloatExtra("price", (float) 21.2);
+        price = getIntent().getStringExtra("price");
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
 
@@ -93,6 +94,8 @@ public class Edit_Delete extends AppCompatActivity {
                 book.setXprice(Float.parseFloat(edPrice.getText().toString()));
                 book.setXdate(edDate.getText().toString());
                 book.setXdescription(edDescription.getText().toString());
+                book.setXuid(getIntent().getStringExtra("uid"));
+                //Log.i("uid",getIntent().getStringExtra("uid"));
 
                 new BookDatabaseEdit().updateBook(key, book, new BookDatabaseEdit.DataStatus() {
                     @Override
@@ -115,6 +118,7 @@ public class Edit_Delete extends AppCompatActivity {
 
                     }
                 });
+                finish();
             }
         });
         edDelete.setOnClickListener(new View.OnClickListener(){
