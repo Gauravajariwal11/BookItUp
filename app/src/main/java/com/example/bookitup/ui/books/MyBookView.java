@@ -134,6 +134,8 @@ public class MyBookView extends AppCompatActivity {
         price = getIntent().getFloatExtra("price", (float)0.0);
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
+
+
         //getting book cover
         mQueue = Volley.newRequestQueue(getApplicationContext());
         String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn.substring(6) ;
@@ -194,6 +196,17 @@ public class MyBookView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyBookView.this,Edit_Delete.class);
+                intent.putExtra("key",key);
+                intent.putExtra("title",book);
+                intent.putExtra("author",edAuthor.getText().toString());
+                intent.putExtra("edition",edEdition.getText().toString());
+                intent.putExtra("isbn",edIsbn.getText().toString());
+
+                //these not needed
+                intent.putExtra("condition",edCondition.getText().toString());
+                intent.putExtra("price",price.toString());
+                intent.putExtra("date",edDate.getText().toString());
+                intent.putExtra("description",edDescription.getText().toString());
                 startActivity(intent);
             }
         });

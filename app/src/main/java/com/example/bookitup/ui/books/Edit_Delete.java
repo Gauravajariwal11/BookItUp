@@ -11,11 +11,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -35,7 +46,7 @@ public class Edit_Delete extends AppCompatActivity {
     private String edition;
     private String isbn;
     private String condition;
-    private Float price;
+    private String price;
     private String date;
     private String description;
 
@@ -44,6 +55,8 @@ public class Edit_Delete extends AppCompatActivity {
 
     private DatabaseReference myRef;
     private FirebaseDatabase database;
+    private RequestQueue mQueue;
+
 
 
     @SuppressLint("WrongViewCast")
@@ -53,35 +66,35 @@ public class Edit_Delete extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.book_edit_delete);
         key = getIntent().getStringExtra("key");
-        book = getIntent().getStringExtra("book");
+        book = getIntent().getStringExtra("title");
         author = getIntent().getStringExtra("author");
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
         condition = getIntent().getStringExtra("condition");
-        price = getIntent().getFloatExtra("price", (float) 0.0);
+        price = getIntent().getStringExtra("price");
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
 
 
-        edBook =  (EditText) findViewById(R.id.bookBED);
+        edBook =  findViewById(R.id.bookBED);
         edBook.setText(book);
-        edAuthor = (EditText) findViewById(R.id.authorBED);
+        edAuthor = findViewById(R.id.authorBED);
         edAuthor.setText(author);
-        edEdition = (EditText) findViewById(R.id.editionBED);
+        edEdition = findViewById(R.id.editionBED);
         edEdition.setText(edition);
-        edIsbn = (EditText) findViewById(R.id.isbnBED);
+        edIsbn = findViewById(R.id.isbnBED);
         edIsbn.setText(isbn);
-        edCondition = (EditText) findViewById(R.id.conditionBED);
+        edCondition = findViewById(R.id.conditionBED);
         edCondition.setText(condition);
-        edPrice = (EditText) findViewById(R.id.priceBED);
+        edPrice = findViewById(R.id.priceBED);
         edPrice.setText(price.toString());
-        edDate = (EditText) findViewById(R.id.dateBED);
+        edDate =  findViewById(R.id.dateBED);
         edDate.setText(date);
-        edDescription = (EditText) findViewById(R.id.descriptionBED);
+        edDescription = findViewById(R.id.descriptionBED);
         edDescription.setText(description);
 
-        saveBtn = (Button) findViewById(R.id.save);
-        cancelBtn = (Button) findViewById(R.id.cancel);
+        saveBtn =  findViewById(R.id.save);
+        cancelBtn = findViewById(R.id.cancel);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +109,7 @@ public class Edit_Delete extends AppCompatActivity {
                 book.setXprice(Float.parseFloat(edPrice.getText().toString()));
                 book.setDate(edDate.getText().toString());
                 book.setXdescription(edDescription.getText().toString());
+
 
                 new BookDatabaseEdit().updateBook(key, book, new BookDatabaseEdit.DataStatus() {
                     @Override

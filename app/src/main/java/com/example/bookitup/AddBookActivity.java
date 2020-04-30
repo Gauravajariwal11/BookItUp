@@ -85,11 +85,7 @@ public class AddBookActivity extends AppCompatActivity {
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
-                {
-                    maxid=(int) dataSnapshot.getChildrenCount();
-                }
-                else {}
+
             }
 
             @Override
@@ -113,7 +109,9 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
-                detail.setDate(date.toString());}
+                detail.setDate(date.toString());
+                newrecord.push().setValue(detail);
+                }
                 catch(Exception e){
                     System.out.println(e);
                 }
