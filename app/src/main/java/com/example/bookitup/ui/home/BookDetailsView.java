@@ -25,16 +25,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.bookitup.BookActivity;
-import com.example.bookitup.BookDatabaseEdit;
-import com.example.bookitup.FirebaseMethods;
+
 import com.example.bookitup.R;
-import com.example.bookitup.RecyclerViewConfig;
+
 import com.example.bookitup.SellerAdapter;
 import com.example.bookitup.SellerModel;
-import com.example.bookitup.UserInformation;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,24 +49,19 @@ public class BookDetailsView extends AppCompatActivity {
     private TextView edAuthor;
     private TextView edEdition;
     private TextView edIsbn;
-    private TextView edCondition;
-    private TextView edPrice;
-    private TextView edDate;
-    private TextView edDescription;
-    private ImageView mImage;
-    private TextView eSeller;
 
-    private String key;
+    private ImageView mImage;
+
     private String book;
     private String author;
     private String edition;
     private String isbn;
     private String condition;
-    private Float price;
+    private String price;
     private String date;
     private String description;
     private String seller;
-    private String seller_email;
+    private String email;
 
     private Button contactBtn;
 
@@ -79,10 +70,8 @@ public class BookDetailsView extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
 
     private FirebaseDatabase database;
-
-    private DatabaseReference ChatRequestsRef, UsersRef, ContactsRef;
-    private FirebaseAuth mAuth;
-    private String currentUserID;
+    private ArrayList<SellerModel> models = new ArrayList<>();
+    private SellerModel m = new SellerModel();
 
     private RequestQueue mQueue;
     BookActivity bookActivity;
@@ -109,69 +98,53 @@ public class BookDetailsView extends AppCompatActivity {
 
         bookActivity = new BookActivity();
         mImage = findViewById(R.id.coverIM);
-        key = getIntent().getStringExtra("key");
         book = getIntent().getStringExtra("title");
         author = getIntent().getStringExtra("author");
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
 
+
+
+        //Call from database Booklist
+        String searchString = isbn.substring(6);
+        databaseRef.orderByChild("isbn")
+                .equalTo(searchString)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            condition = data.getValue(BookActivity.class).getXcondition();
+                            price = data.getValue(BookActivity.class).getXprice();
+                            description = data.getValue(BookActivity.class).getXdescription();
+                            date = data.getValue(BookActivity.class).getDate();
+                            seller = data.getValue(BookActivity.class).getSellerName();
+                            email = data.getValue(BookActivity.class).getEmail();
+
+                            //Set book details
+                            m.setCondition(condition);
+                            m.setPrice(price);
+                            m.setDescription(description);
+                            m.setDate(date);
+                            m.setBookName(book);
+
+                            //Set seller info
+                            m.setEmail(email);
+                            m.setName(seller);
+                            models.add(m);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
         // specify an adapter
-        mAdapter = new SellerAdapter(this, getMyList(book));
+        mAdapter = new SellerAdapter(this, models);
+
         recyclerView.setAdapter(mAdapter);
-
-//        //Call from database Booklist
-//        String searchString = isbn.substring(6);
-//        databaseRef.orderByChild("isbn")
-//                .equalTo(searchString)
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-//                            condition = data.getValue(BookActivity.class).getXcondition();
-//                            edCondition.setText("Book condition: " + condition);
-//                            price = data.getValue(BookActivity.class).getXprice();
-//                            edPrice.setText("Listed for: $" + price.toString());
-//                            description = data.getValue(BookActivity.class).getXdescription();
-//                            edDescription.setText("Description: " + description.toString());
-//                            date = data.getValue(BookActivity.class).getDate();
-//                            edDate.setText("Date posted: " + date.substring(0, 10));
-//                            seller = data.getValue(BookActivity.class).getXuid();
-//                            //Retrieve seller info
-//                            final DatabaseReference databaseUserRef = database.getReference("Users");
-//                            databaseUserRef.orderByKey().equalTo(seller)
-//                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-//                                        @Override
-//                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-//                                                String sellerName = "Listed by: " + data.getValue(UserInformation.class).getfname() + " "
-//                                                        + data.getValue(UserInformation.class).getlname();
-//                                                seller_email = data.getValue(UserInformation.class).getEmail().trim();
-//                                                eSeller = findViewById(R.id.sellerTV);
-//                                                eSeller.setText(sellerName);
-//
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                        }
-//                                    });
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-
-
-//        price = getIntent().getFloatExtra("price", (float) 0.0);
-//        date = getIntent().getStringExtra("date");
-//        description = getIntent().getStringExtra("description");
-
 
         //getting book cover
         mQueue = Volley.newRequestQueue(getApplicationContext());
@@ -221,76 +194,9 @@ public class BookDetailsView extends AppCompatActivity {
         edEdition.setText(edition);
         edIsbn = findViewById(R.id.isbnTV);
         edIsbn.setText(isbn);
-//        edCondition = findViewById(R.id.conditionTV);
-//        edPrice = findViewById(R.id.priceTV);
-//        edPrice.setText(price.toString());
-//        edDate = findViewById(R.id.dateTV);
-//        edDate.setText(date);
-//        edDescription = findViewById(R.id.descriptionTV);
-//        edDescription.setText(description);
 
 
 
     }
 
-    private ArrayList<SellerModel> getMyList(final String bookName){
-
-        final ArrayList<SellerModel> models = new ArrayList<>();
-        final SellerModel m = new SellerModel();
-        final DatabaseReference databaseRef = database.getReference("Booklist");
-
-        //Call from database Booklist
-        String searchString = isbn.substring(6);
-        databaseRef.orderByChild("isbn")
-                .equalTo(searchString)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            condition = data.getValue(BookActivity.class).getXcondition();
-                            price = data.getValue(BookActivity.class).getXprice();
-                            description = data.getValue(BookActivity.class).getXdescription();
-                            date = data.getValue(BookActivity.class).getDate();
-                            seller = data.getValue(BookActivity.class).getXuid();
-                            m.setCondition(condition);
-                            m.setPrice(price.toString());
-                            m.setDate(date.trim());
-                            m.setDescription(description);
-
-                            //Retrieve seller info
-                            final DatabaseReference databaseUserRef = database.getReference("Users");
-                            databaseUserRef.orderByKey().equalTo(seller)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                String sellerName = "Listed by: " + data.getValue(UserInformation.class).getfname() + " "
-                                                        + data.getValue(UserInformation.class).getlname();
-                                                seller_email = data.getValue(UserInformation.class).getEmail().trim();
-                                                eSeller = findViewById(R.id.sellerTV);
-                                                m.setName(sellerName.trim());
-                                                m.setEmail(seller_email);
-                                                m.setBookName(bookName);
-
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-                        }
-                        models.add(m);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-        return models;
-
-}
 }

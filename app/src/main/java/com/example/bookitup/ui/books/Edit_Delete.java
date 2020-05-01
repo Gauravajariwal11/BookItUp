@@ -106,7 +106,7 @@ public class Edit_Delete extends AppCompatActivity {
                 book.setEdition(edEdition.getText().toString());
                 book.setIsbn(edIsbn.getText().toString());
                 book.setXcondition(edCondition.getText().toString());
-                book.setXprice(Float.parseFloat(edPrice.getText().toString()));
+                book.setXprice(edPrice.getText().toString());
                 book.setDate(edDate.getText().toString());
                 book.setXdescription(edDescription.getText().toString());
 

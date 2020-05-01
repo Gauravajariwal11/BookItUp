@@ -53,7 +53,7 @@ public class MyBookView extends AppCompatActivity {
     private String edition;
     private String isbn;
     private String condition;
-    private Float price;
+    private String price;
     private String date;
     private String description;
     private String seller;
@@ -131,7 +131,7 @@ public class MyBookView extends AppCompatActivity {
 
 
 
-        price = getIntent().getFloatExtra("price", (float)0.0);
+        price = getIntent().getStringExtra("price");
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
 

@@ -50,7 +50,7 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerHolder> {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
                 i.putExtra(Intent.EXTRA_EMAIL  , new String[]{models.get(position).getEmail()});
-                i.putExtra(Intent.EXTRA_SUBJECT, "BookItUp - Inquiry for: " + models.get(position).getBookName().trim());
+                i.putExtra(Intent.EXTRA_SUBJECT, "BookItUp - Inquiry for: " + models.get(position).getBookName());
                 i.putExtra(Intent.EXTRA_TEXT   , "Is it still available?");
                 try {
                     c.startActivity(Intent.createChooser(i, "Send mail..."));

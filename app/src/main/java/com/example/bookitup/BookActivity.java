@@ -16,14 +16,16 @@ public class BookActivity
     private String edition;
     private String isbn;
     private String date;
-    private Float Xprice;
+    private String Xprice;
     private String Xcondition;
     private String Xdescription;
     private String Xuid;
+    private String sellerName;
+    private String email;
     public BookActivity() {
     }
 
-    public BookActivity(String xbook, String isbn, String xauthor, Float xprice, String xcondition, String xdescription) {
+    public BookActivity(String xbook, String isbn, String xauthor, String xprice, String xcondition, String xdescription, String sellerName, String email) {
         Xbook = xbook;
         this.isbn = isbn;
         Xauthor = xauthor;
@@ -31,6 +33,8 @@ public class BookActivity
         Xcondition = xcondition;
         Xdescription = xdescription;
         date = ServerValue.TIMESTAMP.toString();
+        this.sellerName = sellerName;
+        this.email = email;
     }
     public String getEdition() {
         return edition;
@@ -74,11 +78,11 @@ public class BookActivity
         Xauthor = xauthor;
     }
 
-    public Float getXprice() {
+    public String getXprice() {
         return Xprice;
     }
 
-    public void setXprice(Float xprice) {
+    public void setXprice(String xprice) {
         Xprice = xprice;
     }
 
@@ -106,4 +110,19 @@ public class BookActivity
         Xuid = xuid;
     }
 
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
