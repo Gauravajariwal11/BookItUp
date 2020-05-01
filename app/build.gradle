@@ -64,5 +64,13 @@ dependencies {
     //json
     implementation 'com.mcxiaoke.volley:library:1.0.0'
 
+    //barcode
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.2'
+    //implementation 'com.google.firebase:firebase-ml-vision-barcode-model:19.0.1'
+
+    //cameraview and dexter
+    implementation 'com.otaliastudios:cameraview:2.6.2'
+    implementation 'com.karumi:dexter:6.1.0'
+
 
 }
