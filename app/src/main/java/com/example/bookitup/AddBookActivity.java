@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,18 @@ import java.util.Date;
 public class AddBookActivity extends AppCompatActivity {
     private EditText entry_name;
     private Spinner bookCondition;
-    EditText Nbook,Nisbn,Ndate,Nauthor,Nprice,Nedition,Ndescription;
+    private DatabaseReference myRef;
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mAuth;
+
+
+
+    EditText Nbook,Nisbn,Nauthor,Nprice,Nedition,Ndescription;
     Button Nsave;
     DatabaseReference newrecord;
     FirebaseDatabase database;
-    int maxid=0;
     String condition;
+    String sellerName;
 
 
     BookActivity detail = new BookActivity();
@@ -85,11 +92,7 @@ public class AddBookActivity extends AppCompatActivity {
         newrecord.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
-                {
-                    maxid=(int) dataSnapshot.getChildrenCount();
-                }
-                else {}
+
             }
 
             @Override
@@ -97,6 +100,29 @@ public class AddBookActivity extends AppCompatActivity {
 
             }
         });
+
+        //retrieve user info
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference().child("Users").child(mAuth.getUid());
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInformation userProfile = dataSnapshot.getValue(UserInformation.class);
+                FirebaseUser user = mAuth.getCurrentUser();
+                sellerName =userProfile.getfname();
+                sellerName = sellerName + " "+ userProfile.getlname();
+
+                //retrieve images for the user in question
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
         Nsave.setOnClickListener(new View.OnClickListener()
         {
 
@@ -109,18 +135,21 @@ public class AddBookActivity extends AppCompatActivity {
                 detail.setEdition(Nedition.getText().toString().trim());
                 detail.setIsbn(Nisbn.getText().toString().trim());
                 detail.setXauthor(Nauthor.getText().toString().trim());
-                detail.setXprice(Float.parseFloat(Nprice.getText().toString()));
+                detail.setXprice(Nprice.getText().toString());
                 detail.setXdescription(Ndescription.getText().toString().trim());
                 detail.setXcondition(condition);
                 detail.setXuid(firebaseAuth.getInstance().getCurrentUser().getUid().trim());
-                detail.setDate(date.toString());}
+                detail.setDate(date.toString());
+                detail.setSellerName(sellerName);
+                detail.setEmail(firebaseAuth.getInstance().getCurrentUser().getEmail().trim());
+                newrecord.push().setValue(detail);
+                }
                 catch(Exception e){
                     System.out.println(e);
                 }
                 if (TextUtils.isEmpty(detail.getXbook())) {
                     Nbook.setError("Book name cannot be empty");
                 }
-                newrecord.child(String.valueOf(maxid+1)).setValue(detail);
                 Toast.makeText(AddBookActivity.this,"Book added successfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddBookActivity.this, MainActivity.class);
                 startActivity(intent);

@@ -48,7 +48,12 @@ public class RecyclerViewConfig {
         private TextView mISBN;
         private TextView mEdition;
         private ImageView mImage;
-        private String mUid;
+        private TextView mUid;
+
+        private TextView mCondition;
+        private TextView mPrice;
+        private TextView mDate;
+        private TextView mDescription;
 
         private Boolean myState;
         private String key;
@@ -59,6 +64,12 @@ public class RecyclerViewConfig {
             mEdition = itemView.findViewById(R.id.edition);
             mISBN = itemView.findViewById(R.id.isbn);
             mImage = itemView.findViewById(R.id.cover_image);
+
+            mCondition = (TextView) itemView.findViewById(R.id.condition);
+            mPrice = (TextView) itemView.findViewById(R.id.price);
+            mDate = (TextView) itemView.findViewById(R.id.date);
+            mDescription = (TextView) itemView.findViewById(R.id.description);
+            mUid = (TextView) itemView.findViewById(R.id.uid);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -74,7 +85,16 @@ public class RecyclerViewConfig {
                         intent.putExtra("author",mAuthor.getText().toString());
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
+
+                        //these not needed
+                        intent.putExtra("condition",mCondition.getText().toString());
+                        intent.putExtra("price",mPrice.getText().toString());
+                        intent.putExtra("date",mDate.getText().toString());
+                        intent.putExtra("description",mDescription.getText().toString());
+                        intent.putExtra("uid",mUid.getText().toString());
                         mContext.startActivity(intent);
+
+
                     }
                     else {
                         //Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
@@ -85,6 +105,12 @@ public class RecyclerViewConfig {
                         intent.putExtra("author",mAuthor.getText().toString());
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
+                        //these not needed
+                        intent.putExtra("condition",mCondition.getText().toString());
+                        intent.putExtra("price",mPrice.getText().toString());
+                        intent.putExtra("date",mDate.getText().toString());
+                        intent.putExtra("description",mDescription.getText().toString());
+                        intent.putExtra("uid",mUid.getText().toString());
                         mContext.startActivity(intent);
                     }
 
@@ -133,7 +159,6 @@ public class RecyclerViewConfig {
             mEdition.setText(book.getEdition() +" edition");
             mISBN.setText("ISBN: "+book.getIsbn());
 
-            mUid = book.getXuid();
             myState =state;
             this.key = key;
         }

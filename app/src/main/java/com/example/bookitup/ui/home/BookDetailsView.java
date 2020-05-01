@@ -1,6 +1,7 @@
 package com.example.bookitup.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,12 +25,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.bookitup.BookActivity;
-import com.example.bookitup.BookDatabaseEdit;
+
 import com.example.bookitup.R;
-import com.example.bookitup.RecyclerViewConfig;
-import com.example.bookitup.UserInformation;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
+
+import com.example.bookitup.SellerAdapter;
+import com.example.bookitup.SellerModel;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDetailsView extends AppCompatActivity {
@@ -45,29 +49,29 @@ public class BookDetailsView extends AppCompatActivity {
     private TextView edAuthor;
     private TextView edEdition;
     private TextView edIsbn;
-    private TextView edCondition;
-    private TextView edPrice;
-    private TextView edDate;
-    private TextView edDescription;
-    private ImageView mImage;
-    private TextView eSeller;
 
-    private String key;
+    private ImageView mImage;
+
     private String book;
     private String author;
     private String edition;
     private String isbn;
     private String condition;
-    private Float price;
+    private String price;
     private String date;
     private String description;
     private String seller;
+    private String email;
 
     private Button contactBtn;
-    private Button wishlistBtn;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private FirebaseDatabase database;
-
+    private ArrayList<SellerModel> models = new ArrayList<>();
+    private SellerModel m = new SellerModel();
 
     private RequestQueue mQueue;
     BookActivity bookActivity;
@@ -81,13 +85,26 @@ public class BookDetailsView extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseRef = database.getReference("Booklist");
         setContentView(R.layout.book_details);
+
+        //recycler view
+        recyclerView = findViewById(R.id.sellerList);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
+
         bookActivity = new BookActivity();
         mImage = findViewById(R.id.coverIM);
-        key = getIntent().getStringExtra("key");
         book = getIntent().getStringExtra("title");
         author = getIntent().getStringExtra("author");
         edition = getIntent().getStringExtra("edition");
         isbn = getIntent().getStringExtra("isbn");
+
+
+
         //Call from database Booklist
         String searchString = isbn.substring(6);
         databaseRef.orderByChild("isbn")
@@ -97,34 +114,23 @@ public class BookDetailsView extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             condition = data.getValue(BookActivity.class).getXcondition();
-                            edCondition.setText("Book condition: " + condition);
                             price = data.getValue(BookActivity.class).getXprice();
-                            edPrice.setText("Listed for: $" + price.toString());
                             description = data.getValue(BookActivity.class).getXdescription();
-                            edDescription.setText("Description: " + description.toString());
                             date = data.getValue(BookActivity.class).getDate();
-                            edDate.setText("Date posted: " + date.substring(0, 10));
-                            seller = data.getValue(BookActivity.class).getXuid();
-                            //Retrieve seller info
-                            final DatabaseReference databaseUserRef = database.getReference("Users");
-                            databaseUserRef.orderByKey().equalTo(seller)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                String sellerName = "Listed by: " + data.getValue(UserInformation.class).getfname() + " "
-                                                        + data.getValue(UserInformation.class).getlname();
-                                                eSeller = findViewById(R.id.sellerTV);
-                                                eSeller.setText(sellerName);
+                            seller = data.getValue(BookActivity.class).getSellerName();
+                            email = data.getValue(BookActivity.class).getEmail();
 
-                                            }
-                                        }
+                            //Set book details
+                            m.setCondition(condition);
+                            m.setPrice(price);
+                            m.setDescription(description);
+                            m.setDate(date);
+                            m.setBookName(book);
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
+                            //Set seller info
+                            m.setEmail(email);
+                            m.setName(seller);
+                            models.add(m);
 
                         }
                     }
@@ -135,10 +141,11 @@ public class BookDetailsView extends AppCompatActivity {
                     }
                 });
 
+        // specify an adapter
+        mAdapter = new SellerAdapter(this, models);
 
-        price = getIntent().getFloatExtra("price", (float) 0.0);
-        date = getIntent().getStringExtra("date");
-        description = getIntent().getStringExtra("description");
+        recyclerView.setAdapter(mAdapter);
+
         //getting book cover
         mQueue = Volley.newRequestQueue(getApplicationContext());
         String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn.substring(6);
@@ -176,6 +183,9 @@ public class BookDetailsView extends AppCompatActivity {
         mQueue.add(jsonObjectRequest);
 
 
+
+
+
         edBook = findViewById(R.id.bookTV);
         edBook.setText(book);
         edAuthor = findViewById(R.id.authorTV);
@@ -184,15 +194,9 @@ public class BookDetailsView extends AppCompatActivity {
         edEdition.setText(edition);
         edIsbn = findViewById(R.id.isbnTV);
         edIsbn.setText(isbn);
-        edCondition = findViewById(R.id.conditionTV);
-        edPrice = findViewById(R.id.priceTV);
-        edPrice.setText(price.toString());
-        edDate = findViewById(R.id.dateTV);
-        edDate.setText(date);
-        edDescription = findViewById(R.id.descriptionTV);
-        edDescription.setText(description);
 
-        contactBtn = findViewById(R.id.contact);
-        wishlistBtn = findViewById(R.id.wishlist);
+
+
     }
+
 }
