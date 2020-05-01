@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -22,6 +23,7 @@ import com.example.bookitup.BookActivity;
 import com.example.bookitup.BookDatabaseEdit;
 import com.example.bookitup.R;
 import com.example.bookitup.RecyclerViewConfig;
+import com.example.bookitup.activity_scan;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +45,14 @@ public class HomeFragment extends Fragment {
     private Context homeContext;
 
     private String option;
+
+    private Button btn_scan;
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_home);
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -146,6 +156,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btn_scan = (Button) view.findViewById(R.id.scan_btn);
+
+        btn_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), activity_scan.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
 }
