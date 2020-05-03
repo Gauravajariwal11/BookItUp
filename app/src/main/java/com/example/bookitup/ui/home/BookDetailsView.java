@@ -71,7 +71,7 @@ public class BookDetailsView extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private ArrayList<SellerModel> models = new ArrayList<>();
-    private SellerModel m = new SellerModel();
+    private SellerModel m;
 
     private RequestQueue mQueue;
     BookActivity bookActivity;
@@ -121,6 +121,7 @@ public class BookDetailsView extends AppCompatActivity {
                             email = data.getValue(BookActivity.class).getEmail();
 
                             //Set book details
+                            m = new SellerModel();
                             m.setCondition(condition);
                             m.setPrice(price);
                             m.setDescription(description);
@@ -131,8 +132,10 @@ public class BookDetailsView extends AppCompatActivity {
                             m.setEmail(email);
                             m.setName(seller);
                             models.add(m);
+                            m = null;
 
                         }
+
                     }
 
                     @Override
@@ -185,7 +188,7 @@ public class BookDetailsView extends AppCompatActivity {
 
 
 
-
+//retrieve fields
         edBook = findViewById(R.id.bookTV);
         edBook.setText(book);
         edAuthor = findViewById(R.id.authorTV);

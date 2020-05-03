@@ -43,6 +43,7 @@ public class BookActivity
     public void setEdition(String edition) {
         this.edition = edition;
     }
+
     public String getXbook() {
         return Xbook;
     }
@@ -83,7 +84,7 @@ public class BookActivity
     }
 
     public void setXprice(String xprice) {
-        Xprice = xprice;
+        this.Xprice = xprice;
     }
 
     public String getXcondition() {

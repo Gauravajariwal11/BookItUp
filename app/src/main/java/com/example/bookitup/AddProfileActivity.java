@@ -95,6 +95,7 @@ public class AddProfileActivity extends AppCompatActivity implements View.OnClic
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
+        //Load profile image
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

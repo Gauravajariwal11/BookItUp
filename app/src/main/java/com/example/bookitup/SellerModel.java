@@ -3,6 +3,8 @@ package com.example.bookitup;
 public class SellerModel {
     private String name, condition, price, date, description, email, bookName;
 
+    //Getter and setter
+
     public String getName() {
         return name;
     }
