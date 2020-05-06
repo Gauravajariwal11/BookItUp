@@ -52,19 +52,23 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="0dp" />
 
-    <Button
-        android:id="@+id/scan_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:layout_marginLeft="10dp"
-        android:text="Scan" />
+<!--    <Button-->
+<!--        android:id="@+id/scan_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="75dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:text="Scan"-->
+<!--        android:background="@drawable/button_style"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textColor="@color/colorWhite" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/search_field"
-        android:layout_marginTop="50dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="20dp">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

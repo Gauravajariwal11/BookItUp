@@ -35,12 +35,14 @@
             android:orientation="vertical" >
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_again"
                 android:text="Scan"
-                android:enabled="false" />
-
+                android:enabled="false"
+                android:background="@drawable/button_style"
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
 
 

@@ -155,16 +155,16 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        btn_scan = (Button) view.findViewById(R.id.scan_btn);
-
-        btn_scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeFragment.this.getActivity(), activity_scan.class);
-                startActivity(intent);
-            }
-        });
+//
+//        btn_scan = (Button) view.findViewById(R.id.scan_btn);
+//
+//        btn_scan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this.getActivity(), activity_scan.class);
+//                startActivity(intent);
+//            }
+//        });
 
         return view;
     }

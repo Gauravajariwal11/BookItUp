@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.AdapterView;
@@ -35,6 +36,7 @@ public class AddBookActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
+    private Button btn_scan;
 
 
 
@@ -64,6 +66,8 @@ public class AddBookActivity extends AppCompatActivity {
         Nauthor=findViewById(R.id.author);
         Nprice=findViewById(R.id.price);
         Nedition=findViewById(R.id.bookEdition);
+        btn_scan = findViewById(R.id.scan_btn);
+
         //drop down menu
         bookCondition = findViewById(R.id.book_condition);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
@@ -156,6 +160,24 @@ public class AddBookActivity extends AppCompatActivity {
 
             }
 
+
+        });
+
+        btn_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Nbook.getText().toString().equals("") || Nauthor.getText().toString().equals("") || Nisbn.getText().toString().equals("")) {
+                    String author = Nbook.getText().toString();
+                    String book = Nbook.getText().toString();
+                    Intent intent = new Intent(AddBookActivity.this.getApplication(), activity_scan.class);
+                    intent.putExtra("author", author);
+                    intent.putExtra("bookname", book);
+                    startActivityForResult(intent, 1);
+                }
+
+
+            }
         });
 
     }
@@ -163,4 +185,21 @@ public class AddBookActivity extends AppCompatActivity {
         entry_name = findViewById(R.id.bookname);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (requestCode == RESULT_OK){
+                String resultAuthor =  data.getStringExtra("author");
+                String resultBook = data.getStringExtra("bookname");
+                Nauthor.setText("" + resultAuthor);
+            }
+        }
+    }
+
+    // btn_scan = FindViewById(R.id.scan_btn);
+
+
 }

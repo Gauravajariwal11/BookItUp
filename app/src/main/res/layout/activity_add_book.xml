@@ -162,14 +162,23 @@
             android:hint="Descriptions" />
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/scan_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/ic_scan_barcode_2" />
+
     <Button
         android:id="@+id/save"
         android:layout_width="152dp"
         android:layout_height="64dp"
         android:background="@drawable/button_style"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
         android:text="Save"
         android:textColor="@color/colorWhite" />
+
+
 </LinearLayout>
