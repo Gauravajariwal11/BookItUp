@@ -44,6 +44,7 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerHolder> {
         holder.condition.setText(models.get(position).getCondition());
         holder.date.setText(models.get(position).getDate());
         holder.description.setText(models.get(position).getDescription());
+        holder.price.setText("$"+models.get(position).getPrice());
         holder.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

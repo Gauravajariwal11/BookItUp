@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SellerHolder extends RecyclerView.ViewHolder {
-    TextView name, condition, date, description;
+    TextView name, condition, date, description, price;
     ImageButton send;
 
     public SellerHolder(@NonNull View itemView) {
@@ -20,5 +20,6 @@ public class SellerHolder extends RecyclerView.ViewHolder {
         this.date = itemView.findViewById(R.id.dateTV);
         this.description = itemView.findViewById(R.id.descriptionTV);
         this.send = itemView.findViewById(R.id.sendEmail);
+        this.price = itemView.findViewById(R.id.priceTV);
     }
 }
