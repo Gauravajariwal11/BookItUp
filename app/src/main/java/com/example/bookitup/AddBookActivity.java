@@ -126,7 +126,7 @@ public class AddBookActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
+            //create new book database and add it on the end of the database
         Nsave.setOnClickListener(new View.OnClickListener()
         {
 
@@ -162,19 +162,27 @@ public class AddBookActivity extends AppCompatActivity {
 
 
         });
-
+                //scan barcode button
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (Nbook.getText().toString().equals("") || Nauthor.getText().toString().equals("") || Nisbn.getText().toString().equals("")) {
+                Intent intent = new Intent(AddBookActivity.this.getApplication(), activity_scan.class);
+                startActivityForResult(intent, 1);
+                Nauthor.setText(intent.getStringExtra("author"));
+                Nbook.setText(intent.getStringExtra("book"));
+                Nbook.setText(intent.getStringExtra("isbn"));
+                detail.setXbook(intent.getStringExtra("book"));
+                detail.setXauthor(intent.getStringExtra("author"));
+                detail.setIsbn(intent.getStringExtra("isbn"));
+                /*if (Nbook.getText().toString().equals("") || Nauthor.getText().toString().equals("") || Nisbn.getText().toString().equals("")) {
                     String author = Nbook.getText().toString();
                     String book = Nbook.getText().toString();
-                    Intent intent = new Intent(AddBookActivity.this.getApplication(), activity_scan.class);
+
                     intent.putExtra("author", author);
                     intent.putExtra("bookname", book);
                     startActivityForResult(intent, 1);
-                }
+                }*/
 
 
             }

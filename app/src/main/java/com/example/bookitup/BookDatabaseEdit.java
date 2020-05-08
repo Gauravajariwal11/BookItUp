@@ -29,7 +29,7 @@ public class BookDatabaseEdit {
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceBooks = mDatabase.getReference("Booklist");
     }
-    public void readBooks(final DataStatus dataStatus){
+    public void readBooks(final DataStatus dataStatus){//Reads the books on the database for home book pile
         mReferenceBooks.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
@@ -52,7 +52,7 @@ public class BookDatabaseEdit {
             }
         });
     }
-    public void readMyBooks(final DataStatus dataStatus){
+    public void readMyBooks(final DataStatus dataStatus){//MyBooks tab books populated after filter
         mReferenceBooks.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
@@ -63,7 +63,7 @@ public class BookDatabaseEdit {
                     System.out.println(book);
                     System.out.println(keyNode.getKey());
                     try {
-                        if (book.getXuid().equals(firebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        if (book.getXuid().equals(firebaseAuth.getInstance().getCurrentUser().getUid())) {//if uid matches to current user, pile on my book tab
                             keys.add(keyNode.getKey());
 
                             books.add(book);
@@ -86,7 +86,7 @@ public class BookDatabaseEdit {
             }
         });
     }
-    public void updateBook(String key, BookActivity book, final DataStatus dataStatus)
+    public void updateBook(String key, BookActivity book, final DataStatus dataStatus)//Edit the bookactivity object
     {
         mReferenceBooks.child(key).setValue(book).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -95,7 +95,7 @@ public class BookDatabaseEdit {
             }
         });
     }
-    public  void deleteBook(String key, final DataStatus dataStatus)
+    public  void deleteBook(String key, final DataStatus dataStatus)//delete the bookactivity object
     {
         mReferenceBooks.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -106,7 +106,7 @@ public class BookDatabaseEdit {
 
     }
 
-    public void readBooksFiltered(String searchString, String searchOption, final DataStatus dataStatus){
+    public void readBooksFiltered(String searchString, String searchOption, final DataStatus dataStatus){//filter search Bookactivity database
         mReferenceBooks.orderByChild(searchOption)
                 .startAt(searchString)
                 .endAt(searchString + "\uf8ff")

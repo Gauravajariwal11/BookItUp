@@ -58,7 +58,7 @@ public class Edit_Delete extends AppCompatActivity {
     private RequestQueue mQueue;
 
 
-
+        //edit each place holder tiles on MyBooks
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle saveInstanceState)
@@ -75,7 +75,7 @@ public class Edit_Delete extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         description = getIntent().getStringExtra("description");
 
-
+        //New filled information to edit the database
         edBook =  findViewById(R.id.bookBED);
         edBook.setText(book);
         edAuthor = findViewById(R.id.authorBED);
@@ -99,7 +99,7 @@ public class Edit_Delete extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
-            {
+            {               //saves data when button clicked
                 BookActivity book = new BookActivity();
                 book.setXbook(edBook.getText().toString());
                 book.setXauthor(edAuthor.getText().toString());

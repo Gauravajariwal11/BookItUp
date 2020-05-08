@@ -57,7 +57,7 @@ public class RecyclerViewConfig {
 
         private Boolean myState;
         private String key;
-        public BookItemView(ViewGroup parent){
+        public BookItemView(ViewGroup parent){//Individual book tile setup
             super(LayoutInflater.from(mContext).inflate(R.layout.list_view,parent,false));
             mTitle = itemView.findViewById(R.id.book_name_text);
             mAuthor = itemView.findViewById(R.id.author_name);
@@ -77,7 +77,7 @@ public class RecyclerViewConfig {
                 public void onClick(View view) {
                     if(myState)
                     {
-                        //Toast.makeText(view.getContext(),"Opening this Book, Please wait!",Toast.LENGTH_LONG).show();
+                        //"Opening this Book and inserting it to the individual tile
 
                         Intent intent = new Intent(mContext, MyBookView.class);
                         intent.putExtra("key",key);
@@ -86,7 +86,6 @@ public class RecyclerViewConfig {
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
 
-                        //these not needed
                         intent.putExtra("condition",mCondition.getText().toString());
                         intent.putExtra("price",mPrice.getText().toString());
                         intent.putExtra("date",mDate.getText().toString());
@@ -105,7 +104,7 @@ public class RecyclerViewConfig {
                         intent.putExtra("author",mAuthor.getText().toString());
                         intent.putExtra("edition",mEdition.getText().toString());
                         intent.putExtra("isbn",mISBN.getText().toString());
-                        //these not needed
+
                         intent.putExtra("condition",mCondition.getText().toString());
                         intent.putExtra("price",mPrice.getText().toString());
                         intent.putExtra("date",mDate.getText().toString());
@@ -164,7 +163,7 @@ public class RecyclerViewConfig {
         }
     }
 
-    class BooksAdapter extends RecyclerView.Adapter<BookItemView>{
+    class BooksAdapter extends RecyclerView.Adapter<BookItemView>{//generating booklist array
         private List<BookActivity> mBookList;
         private List<String> mKeys;
         private Boolean mState;

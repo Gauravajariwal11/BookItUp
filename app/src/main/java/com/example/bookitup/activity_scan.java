@@ -68,9 +68,9 @@ public class activity_scan extends AppCompatActivity {
 
     private String key;
     public String book;
-    private String author;
+    public String author;
     private String edition;
-    private String isbn;
+    public String isbn;
     private String condition;
     private String price;
     private String date;

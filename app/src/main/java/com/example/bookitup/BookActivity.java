@@ -24,7 +24,7 @@ public class BookActivity
     private String email;
     public BookActivity() {
     }
-
+    //Constructor to add an object for BookActvity
     public BookActivity(String xbook, String isbn, String xauthor, String xprice, String xcondition, String xdescription, String sellerName, String email) {
         Xbook = xbook;
         this.isbn = isbn;
