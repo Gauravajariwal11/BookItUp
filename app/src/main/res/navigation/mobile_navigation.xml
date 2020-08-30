@@ -12,32 +12,40 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.bookitup.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_profile"
+        android:name="com.example.bookitup.ui.profile.ProfileFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_profile_edit"
+            app:destination="@id/nav_profile_edit" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile_edit"
+        android:name="com.example.bookitup.ui.profile.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"/>
+
+
+    <fragment
+        android:id="@+id/nav_books"
+        android:name="com.example.bookitup.ui.books.BooksFragment"
+        android:label="@string/menu_books"
+        tools:layout="@layout/fragment_books" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.bookitup.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.bookitup.ui.order.OrderHistoryFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_order" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.bookitup.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_wishlist"
+        android:name="com.example.bookitup.ui.wishlist.WishListFragment"
+        tools:layout="@layout/fragment_wishlist"/>
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.bookitup.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/nav_chat"
         android:name="com.example.bookitup.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:label="@string/menu_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

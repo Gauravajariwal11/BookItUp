@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
+        Toast.makeText(LoginActivity.this, "Firebase connection Sucess",Toast.LENGTH_LONG).show();
+
     }
 
     private void loginUserAccount() {
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         email = emailTV.getText().toString();
         password = passwordTV.getText().toString();
 
+        //notify user to enter email and password if field is empty
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
             return;
@@ -74,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             final FirebaseUser user = mAuth.getCurrentUser();
                             user.isEmailVerified();
-                            if(!(user.isEmailVerified())){
+                            if(!user.isEmailVerified()){
                                 Toast.makeText(getApplicationContext(), "Please verify your email before login.", Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
                             }

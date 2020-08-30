@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "732084399447-5s8la2b0ut2a1a0t99dhf8fp597nd7bl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookitup",
+            "certificate_hash": "9d04de8e77d6e3d5f3a7e3df8be8a47875ef934a"
+          }
+        },
+        {
           "client_id": "732084399447-qk686seo27lfcb89gkdbfa8lhf0qj797.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

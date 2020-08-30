@@ -3,6 +3,8 @@
     package="com.example.bookitup">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResetPasswordActivity"></activity>
-        <activity android:name=".MenuActivity" />
+        <activity android:name=".activity_scan" />
+        <activity android:name=".ResetPasswordActivity" />
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="barcode" /> <!-- To use multiple models: android:value="barcode,model2,model3" -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,6 +31,15 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
+        <activity android:name=".AddBookActivity" />
+        <activity android:name=".AddProfileActivity" />
+        <activity android:name=".ui.books.Edit_Delete" />
+        <activity android:name=".ui.home.BookDetailsView" />
+        <activity android:name=".ui.books.MyBookView" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

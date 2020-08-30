@@ -18,6 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -82,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
                                 emailVerification(mAuth.getCurrentUser());
-                                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(RegistrationActivity.this, AddProfileActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();

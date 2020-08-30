@@ -9,6 +9,13 @@
     android:padding="16dp"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo"></ImageView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +37,10 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_gravity="center"
+        android:text="Login"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/button_style"/>
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -41,8 +51,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:text="Forgot Password?"
-        android:textColor="#009999"
+        android:text="@string/forgot_password"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <ProgressBar

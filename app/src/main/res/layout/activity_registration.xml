@@ -9,6 +9,13 @@
     android:padding="16dp"
     tools:context=".RegistrationActivity">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo"></ImageView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,19 +38,21 @@
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="Register"
+        android:background="@drawable/button_style"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account? Login instead."
+        android:text="@string/action_login_instead"
         android:textStyle="italic"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:textColor="#009999"
+        android:textColor="@color/colorPrimary"
         android:layout_gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 

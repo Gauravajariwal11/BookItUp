@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.bookitup.MainActivity">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+
+    <EditText
+        android:id="@+id/search_field"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/search_layout"
+        android:ems="10"
+        android:hint="Enter keywords"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="#999999"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_alignBottom="@+id/search_field"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/background_light"
+        app:srcCompat="@drawable/ic_search_black_24dp" />
+
+    <Spinner
+        android:id="@+id/search_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_alignBottom="@+id/search_field"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="110dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/scan_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="75dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:text="Scan"-->
+<!--        android:background="@drawable/button_style"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textColor="@color/colorWhite" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/result_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_field"
+        android:layout_marginTop="20dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
