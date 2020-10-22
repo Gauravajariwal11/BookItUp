@@ -3,10 +3,10 @@ A mobile application that allows a user to search for university course material
 
 These are few screenshots of the app, and the logo as well
 
-![logo] (https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookitUp-removebg-preview.png)
+<img src="https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookitUp-removebg-preview.png" alt="Logo" width="300" height="300"/>
 
-![Navigation tab] (https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_2.jpg)
-
-![User Profile] (https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_3.jpg)
-
-![Adding a book] (https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_4.jpg)
+<p align="center">
+  <img src="https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_2.jpg" alt="Navigation tab" width="250"/>
+  <img src="https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_3.jpg" alt="User Profile" width="250"/>
+  <img src="https://github.com/Gauravajariwal11/BookItUp/blob/assets/BookItUp_4.jpg" alt="Adding a book" width="250"/>
+</p>
